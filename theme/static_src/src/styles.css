@@ -114,6 +114,15 @@
     border-color: rgba(220, 38, 38, 0.3) !important;
   }
 
+  /* Mejoras para imagen de fondo hero en modo oscuro */
+  [data-theme="dark"] .hero-bg-image {
+    opacity: 0.15 !important;
+  }
+
+  [data-theme="dark"] .hero-bg-overlay {
+    background: linear-gradient(to bottom right, rgba(11, 18, 32, 0.8), rgba(15, 23, 42, 0.8)) !important;
+  }
+
   /* Mejoras para botones en modo oscuro */
   [data-theme="dark"] .btn-outline {
     border-color: var(--color-primary) !important;

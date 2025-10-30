@@ -22,7 +22,8 @@ class EmpresaAdmin(admin.ModelAdmin):
             'fields': ('direccion', 'telefono', 'email_principal', 'email_secundario')
         }),
         ('Imágenes', {
-            'fields': ('logo', 'imagen_principal')
+            'fields': ('logo', 'imagen_principal', 'imagen_fondo_hero'),
+            'description': 'Logo: Se muestra en la navegación. Imagen Principal: Se muestra en la sección hero. Imagen Fondo Hero: Imagen de fondo para la sección hero.'
         }),
         ('Fechas', {
             'fields': ('fecha_creacion', 'fecha_actualizacion'),

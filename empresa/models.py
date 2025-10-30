@@ -16,6 +16,8 @@ class Empresa(models.Model):
     email_secundario = models.EmailField(blank=True, null=True)
     logo = models.ImageField(upload_to='empresa/', blank=True, null=True)
     imagen_principal = models.ImageField(upload_to='empresa/', blank=True, null=True)
+    imagen_fondo_hero = models.ImageField(upload_to='empresa/', blank=True, null=True, 
+                                        help_text="Imagen de fondo para la sección hero de la página principal")
     activo = models.BooleanField(default=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)

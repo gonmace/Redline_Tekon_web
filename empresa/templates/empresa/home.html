@@ -5,8 +5,14 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-gradient-to-br from-base-200 to-base-300 text-base-content py-20" style="margin-top: 64px;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="bg-gradient-to-br from-base-200 to-base-300 text-base-content py-20 relative overflow-hidden" style="margin-top: 64px;">
+    {% if empresa and empresa.imagen_fondo_hero %}
+    <div class="absolute inset-0 z-0">
+        <img src="{{ empresa.imagen_fondo_hero.url }}" alt="Fondo TEKON" class="w-full h-full object-cover opacity-20 hero-bg-image">
+        <div class="absolute inset-0 bg-gradient-to-br from-base-200/80 to-base-300/80 hero-bg-overlay"></div>
+    </div>
+    {% endif %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
                 <div class="space-y-4">
