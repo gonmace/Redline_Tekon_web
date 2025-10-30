@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo DaisyUI - TEKON RedLine</title>
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+</head>
+<body class="bg-base-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-tekon-black mb-8">Demo DaisyUI v5.3.10 - TEKON RedLine</h1>
+        
+        <!-- Botones -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Botones</h2>
+            <div class="flex flex-wrap gap-4">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-accent">Accent</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-link">Link</button>
+                <button class="btn btn-outline">Outline</button>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Cards</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://via.placeholder.com/400x200/DC2626/FFFFFF?text=TEKON+RedLine" alt="Servicio 1" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-tekon-red">Ingeniería</h2>
+                        <p>Soluciones de ingeniería especializadas para proyectos complejos.</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Más Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://via.placeholder.com/400x200/111827/FFFFFF?text=Construcción" alt="Servicio 2" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-tekon-black">Construcción</h2>
+                        <p>Proyectos de construcción con los más altos estándares de calidad.</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-secondary">Más Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://via.placeholder.com/400x200/6B7280/FFFFFF?text=Supervisión" alt="Servicio 3" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-tekon-gray">Supervisión</h2>
+                        <p>Supervisión técnica especializada para garantizar la excelencia.</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-accent">Más Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formularios -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Formularios</h2>
+            <div class="max-w-md">
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Nombre</span>
+                    </label>
+                    <input type="text" placeholder="Ingresa tu nombre" class="input input-bordered w-full" />
+                </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="email" placeholder="tu@email.com" class="input input-bordered w-full" />
+                </div>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Mensaje</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" placeholder="Escribe tu mensaje aquí"></textarea>
+                </div>
+                <div class="form-control mt-6">
+                    <button class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Alertas</h2>
+            <div class="space-y-4">
+                <div class="alert alert-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Información importante sobre nuestros servicios.</span>
+                </div>
+                <div class="alert alert-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>¡Proyecto completado exitosamente!</span>
+                </div>
+                <div class="alert alert-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+                    <span>Revisa los detalles antes de continuar.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Pestañas</h2>
+            <div role="tablist" class="tabs tabs-lifted">
+                <a role="tab" class="tab tab-active">Servicios</a>
+                <a role="tab" class="tab">Proyectos</a>
+                <a role="tab" class="tab">Equipo</a>
+            </div>
+            <div class="bg-base-100 border border-base-300 rounded-b-lg p-6">
+                <p class="text-tekon-gray">Contenido de la pestaña seleccionada. Aquí puedes mostrar información específica sobre cada sección.</p>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-tekon-black mb-6">Estadísticas</h2>
+            <div class="stats shadow">
+                <div class="stat">
+                    <div class="stat-figure text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <div class="stat-title">Proyectos Completados</div>
+                    <div class="stat-value text-primary">150+</div>
+                    <div class="stat-desc">Más de 150 proyectos exitosos</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="stat-title">Años de Experiencia</div>
+                    <div class="stat-value text-secondary">21+</div>
+                    <div class="stat-desc">Más de 21 años en el mercado</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path></svg>
+                    </div>
+                    <div class="stat-title">Clientes Satisfechos</div>
+                    <div class="stat-value">98%</div>
+                    <div class="stat-desc">Tasa de satisfacción del cliente</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="alert alert-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+                <h3 class="font-bold">¡DaisyUI v5.3.10 funcionando correctamente!</h3>
+                <div class="text-xs">Componentes pre-construidos listos para usar con Tailwind CSS v4.1.16</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tailwind CSS - Django</title>
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-tekon-black mb-6">Test Tailwind CSS v4 - Django</h1>
+        <div class="bg-tekon-red text-white p-6 rounded-lg mb-4">
+            <h2 class="text-2xl font-semibold mb-2">Sección Roja</h2>
+            <p class="text-lg">Este es un test de los colores de TEKON RedLine con Tailwind v4</p>
+        </div>
+        <div class="bg-tekon-black text-white p-6 rounded-lg mb-4">
+            <h2 class="text-2xl font-semibold mb-2">Sección Negra</h2>
+            <p class="text-lg">Colores corporativos funcionando correctamente con Tailwind v4</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-tekon-red font-bold">Servicio 1</h3>
+                <p class="text-tekon-gray">Descripción del servicio</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-tekon-red font-bold">Servicio 2</h3>
+                <p class="text-tekon-gray">Descripción del servicio</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-tekon-red font-bold">Servicio 3</h3>
+                <p class="text-tekon-gray">Descripción del servicio</p>
+            </div>
+        </div>
+        <!-- Test de colores personalizados -->
+        <div class="mt-8 space-y-4">
+            <h3 class="text-2xl font-bold text-tekon-black mb-4">Test de Colores Personalizados</h3>
+            
+            <div class="flex gap-4 flex-wrap">
+                <button class="bg-tekon-red hover:bg-tekon-red-dark text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                    Botón Principal
+                </button>
+                <button class="border-2 border-tekon-red text-tekon-red hover:bg-tekon-red hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                    Botón Outline
+                </button>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                <h4 class="text-lg font-semibold text-tekon-red mb-2">Tarjeta de Prueba</h4>
+                <p class="text-tekon-gray">Esta es una tarjeta usando los colores personalizados de TEKON</p>
+            </div>
+        </div>
+
+        <!-- Responsive Design Test -->
+        <div class="mt-8">
+            <h3 class="text-2xl font-bold text-tekon-black mb-4">Test Responsive</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-tekon-red text-white p-4 rounded text-center">SM</div>
+                <div class="bg-tekon-red-dark text-white p-4 rounded text-center">MD</div>
+                <div class="bg-tekon-black text-white p-4 rounded text-center">LG</div>
+                <div class="bg-tekon-gray text-white p-4 rounded text-center">XL</div>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-green-100 border border-green-400 rounded-lg">
+            <p class="text-green-800 font-semibold">✅ Tailwind CSS v4.1.11 configurado correctamente!</p>
+            <p class="text-green-700 mt-2">✨ Incluye: Colores personalizados, componentes reutilizables, y configuración optimizada</p>
+            <p class="text-green-600 mt-1 text-sm">Configuración actualizada según la documentación más reciente de Tailwind CSS v4</p>
+        </div>
+    </div>
+</body>
+</html>

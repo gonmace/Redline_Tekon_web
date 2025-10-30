@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Theme</title>
+    <link href="/static/css/dist/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-base-100 text-base-content p-8">
+    <div class="max-w-4xl mx-auto space-y-8">
+        <h1 class="text-4xl font-bold text-primary">Test de Temas DaisyUI</h1>
+        
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-primary">Card de Prueba</h2>
+                <p class="text-base-content/70">Este es un texto de prueba para verificar que los colores del tema se aplican correctamente.</p>
+                <div class="card-actions justify-end">
+                    <button class="btn btn-primary">Botón Primario</button>
+                    <button class="btn btn-outline">Botón Outline</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats shadow">
+            <div class="stat">
+                <div class="stat-figure text-primary">
+                    <i class="fas fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Ventas</div>
+                <div class="stat-value text-primary">25.6K</div>
+                <div class="stat-desc">21% más que el mes pasado</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-figure text-secondary">
+                    <i class="fas fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Usuarios</div>
+                <div class="stat-value text-secondary">2.6M</div>
+                <div class="stat-desc">21% más que el mes pasado</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            <span>Este es un mensaje informativo usando el tema actual.</span>
+        </div>
+
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <span>Este es un mensaje de éxito usando el tema actual.</span>
+        </div>
+
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Este es un mensaje de advertencia usando el tema actual.</span>
+        </div>
+
+        <div class="alert alert-error">
+            <i class="fas fa-times-circle"></i>
+            <span>Este es un mensaje de error usando el tema actual.</span>
+        </div>
+
+        <div class="flex gap-4">
+            <button id="theme-toggle" class="btn btn-outline">
+                <i class="fas fa-moon mr-2"></i><span>Tema</span>
+            </button>
+            <button class="btn btn-primary">Botón Primario</button>
+            <button class="btn btn-secondary">Botón Secundario</button>
+            <button class="btn btn-accent">Botón Accent</button>
+        </div>
+    </div>
+
+    <script>
+        // DaisyUI theme toggle (light / dark)
+        (function() {
+            const root = document.documentElement;
+            const storageKey = 'theme';
+            const saved = localStorage.getItem(storageKey);
+            const fallback = 'light';
+            const initial = saved || fallback;
+            root.setAttribute('data-theme', initial);
+            document.body.setAttribute('data-theme', initial);
+
+            const btn = document.getElementById('theme-toggle');
+            
+            const setBtnIcon = (theme) => {
+                if (btn) {
+                    btn.innerHTML = (theme === 'dark')
+                        ? '<i class="fas fa-sun mr-2"></i><span>Tema</span>'
+                        : '<i class="fas fa-moon mr-2"></i><span>Tema</span>';
+                }
+            };
+            setBtnIcon(initial);
+
+            const toggleTheme = () => {
+                const current = root.getAttribute('data-theme') || fallback;
+                const next = current === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                document.body.setAttribute('data-theme', next);
+                localStorage.setItem(storageKey, next);
+                setBtnIcon(next);
+            };
+
+            if (btn) {
+                btn.addEventListener('click', toggleTheme);
+            }
+        })();
+    </script>
+</body>
+</html>

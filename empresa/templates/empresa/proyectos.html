@@ -1,0 +1,244 @@
+{% extends 'empresa/base.html' %}
+{% load static %}
+
+{% block title %}Proyectos - {{ empresa.nombre|default:"TK REDLINE SPA" }}{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-6">
+                Nuestros Proyectos
+            </h1>
+            <p class="text-xl text-primary-content/80 max-w-3xl mx-auto leading-relaxed">
+                Más de 21 años de experiencia en proyectos de ingeniería, construcción y supervisión. 
+                Cada proyecto es una historia de éxito y compromiso con la excelencia.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos Grid -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if proyectos %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for proyecto in proyectos %}
+            <div class="card bg-base-100 shadow-lg group hover:shadow-xl transition-all duration-300 overflow-hidden">
+                {% if proyecto.imagen %}
+                    <div class="relative overflow-hidden">
+                        <img src="{{ proyecto.imagen.url }}" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ proyecto.nombre }}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-base-content/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                {% else %}
+                    <div class="h-64 bg-base-200 flex items-center justify-center group-hover:bg-primary/5 transition-colors duration-300">
+                        <i class="fas fa-project-diagram text-primary text-6xl group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+                {% endif %}
+                <div class="card-body p-6">
+                    <h5 class="card-title text-base-content mb-3 group-hover:text-primary transition-colors duration-300">{{ proyecto.nombre }}</h5>
+                    <p class="text-base-content/70 mb-4 leading-relaxed">{{ proyecto.descripcion|truncatewords:25 }}</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-primary">
+                            <i class="fas fa-building mr-3"></i>
+                            <span class="font-semibold">{{ proyecto.cliente }}</span>
+                        </div>
+                        {% if proyecto.fecha_inicio %}
+                        <div class="flex items-center text-base-content/70">
+                            <i class="fas fa-calendar mr-3"></i>
+                            <span>
+                                {% if proyecto.fecha_fin %}
+                                    {{ proyecto.fecha_inicio|date:"M Y" }} - {{ proyecto.fecha_fin|date:"M Y" }}
+                                {% else %}
+                                    Iniciado: {{ proyecto.fecha_inicio|date:"M Y" }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endif %}
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="badge badge-primary">Proyecto Completado</span>
+                            {% if proyecto.destacado %}
+                                <span class="badge badge-warning">Destacado</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-neutral/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                <i class="fas fa-project-diagram text-neutral text-4xl"></i>
+            </div>
+            <h4 class="text-2xl font-bold text-base-content mb-4">Proyectos en desarrollo</h4>
+            <p class="text-base-content/70 text-lg">Estamos preparando la información de nuestros proyectos más destacados.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Proyectos Destacados por Categoría -->
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Proyectos por Categoría</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Nuestra experiencia abarca múltiples sectores y tipos de proyectos.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Telecomunicaciones -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mr-4 group-hover:bg-primary/20 transition-colors duration-300">
+                        <i class="fas fa-broadcast-tower text-primary text-2xl"></i>
+                    </div>
+                    <h5 class="text-2xl font-bold text-base-content">Telecomunicaciones</h5>
+                </div>
+                <p class="text-base-content/70 mb-6 leading-relaxed">
+                    Supervisión y construcción de radio bases, telepuertos y infraestructura de telecomunicaciones.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>64 Sitios de Telecomunicaciones
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>3 Telepuertos para SpaceX
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Radio Bases en Bolivia
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Desarrollo de Software
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Energía -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mr-4 group-hover:bg-accent/20 transition-colors duration-300">
+                        <i class="fas fa-solar-panel text-accent text-2xl"></i>
+                    </div>
+                    <h5 class="text-2xl font-bold text-base-content">Energía</h5>
+                </div>
+                <p class="text-base-content/70 mb-6 leading-relaxed">
+                    Proyectos de energía solar fotovoltaica y estudios de ingeniería para plantas energéticas.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Planta Solar Fotovoltaica
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Estudios de Ingeniería Básica
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Topografía y Geotecnia
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Diseño de Accesos
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Infraestructura -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mr-4 group-hover:bg-secondary/20 transition-colors duration-300">
+                        <i class="fas fa-road text-secondary text-2xl"></i>
+                    </div>
+                    <h5 class="text-2xl font-bold text-base-content">Infraestructura</h5>
+                </div>
+                <p class="text-base-content/70 mb-6 leading-relaxed">
+                    Construcción y supervisión de carreteras, urbanizaciones y complejos deportivos.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Carreteras y Rutas
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Urbanizaciones
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Complejos Deportivos
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Parques Industriales
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Educación -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-info/10 rounded-2xl flex items-center justify-center mr-4 group-hover:bg-info/20 transition-colors duration-300">
+                        <i class="fas fa-school text-info text-2xl"></i>
+                    </div>
+                    <h5 class="text-2xl font-bold text-base-content">Educación</h5>
+                </div>
+                <p class="text-base-content/70 mb-6 leading-relaxed">
+                    Construcción y fiscalización de edificios escolares y laboratorios educativos.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Teatro Coliseo Cambridge
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Edificios de Laboratorios
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Estudios de Factibilidad
+                    </li>
+                    <li class="flex items-center text-base-content/70">
+                        <i class="fas fa-check text-primary mr-3"></i>Auditorías Técnicas
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Estadísticas de Proyectos -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div class="stat">
+                <div class="stat-value text-primary">100+</div>
+                <div class="stat-title text-base-content/70">Proyectos Completados</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value text-primary">50+</div>
+                <div class="stat-title text-base-content/70">Clientes Satisfechos</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value text-primary">21+</div>
+                <div class="stat-title text-base-content/70">Años de Experiencia</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value text-primary">2</div>
+                <div class="stat-title text-base-content/70">Países de Operación</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold mb-6">¿Tienes un proyecto en mente?</h2>
+            <p class="text-xl text-primary-content/80 mb-8 max-w-3xl mx-auto">
+                Nuestra experiencia y compromiso con la calidad garantizan el éxito de tu proyecto.
+            </p>
+            <a href="{% url 'empresa:contacto' %}" class="btn btn-secondary text-lg px-8 py-4">
+                <i class="fas fa-rocket mr-2"></i>Comenzar Proyecto
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

@@ -1,0 +1,225 @@
+{% extends 'empresa/base.html' %}
+{% load static %}
+
+{% block title %}{{ empresa.nombre|default:"TK REDLINE SPA" }} - Soluciones Eficientes en Ingeniería{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-base-200 to-base-300 text-base-content py-20" style="margin-top: 64px;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <h1 class="text-5xl lg:text-6xl font-bold leading-tight">
+                        <span class="text-primary">SOLUCIONES</span><br>
+                        <span class="text-base-content">EFICIENTES</span>
+                    </h1>
+                    <div class="w-20 h-1 bg-primary"></div>
+                </div>
+                <p class="text-xl text-base-content/70 leading-relaxed">
+                    {% if empresa %}
+                        {{ empresa.descripcion|truncatewords:30 }}
+                    {% else %}
+                        Especializados en la prestación de servicios generales para el desarrollo de proyectos de ingeniería, construcción, supervisión, fiscalización y capacitación de personal.
+                    {% endif %}
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{% url 'empresa:contacto' %}" class="btn btn-primary btn-lg">
+                        Contáctanos
+                    </a>
+                    <a href="{% url 'empresa:servicios' %}" class="btn btn-outline btn-lg">
+                        Nuestros Servicios
+                    </a>
+                </div>
+            </div>
+            <div class="text-center">
+                {% if empresa and empresa.imagen_principal %}
+                    <img src="{{ empresa.imagen_principal.url }}" alt="{{ empresa.nombre }}" class="w-full max-w-lg mx-auto rounded-lg shadow-2xl">
+                {% else %}
+                    <div class="bg-base-100 text-base-content p-12 rounded-lg shadow-2xl">
+                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-crosshairs text-primary-content text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span class="text-primary">TEKON</span> <span class="text-base-content">RedLine</span>
+                        </h3>
+                        <p class="text-base-content/70">Ingeniería & Supervisión</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios Destacados -->
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold text-base-content mb-6">Nuestros Servicios</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Ofrecemos soluciones integrales en ingeniería, construcción y supervisión con más de 21 años de experiencia.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for servicio in servicios %}
+            <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center group border border-base-300 hover:border-primary/30">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                    {% if servicio.icono %}
+                        <i class="{{ servicio.icono }} text-primary text-2xl"></i>
+                    {% else %}
+                        <i class="fas fa-cogs text-primary text-2xl"></i>
+                    {% endif %}
+                </div>
+                <h3 class="text-xl font-bold text-base-content mb-4 group-hover:text-primary transition-colors duration-300">{{ servicio.nombre }}</h3>
+                <p class="text-base-content/70 leading-relaxed">{{ servicio.descripcion|truncatewords:20 }}</p>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-tools text-primary text-3xl"></i>
+                </div>
+                <p class="text-base-content/70 text-lg">Los servicios se están cargando...</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'empresa:servicios' %}" class="btn btn-primary btn-lg">
+                Ver Todos los Servicios
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos Destacados -->
+{% if proyectos_destacados %}
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold text-base-content mb-6">Proyectos Destacados</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Algunos de nuestros proyectos más importantes que demuestran nuestra experiencia y calidad.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for proyecto in proyectos_destacados %}
+            <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-base-300 hover:border-primary/30">
+                {% if proyecto.imagen %}
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nombre }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                {% else %}
+                    <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:from-primary/30 group-hover:to-primary/20 transition-all duration-300">
+                        <i class="fas fa-project-diagram text-primary text-4xl"></i>
+                    </div>
+                {% endif %}
+                <div class="card-body p-6">
+                    <h3 class="card-title text-base-content mb-3 group-hover:text-primary transition-colors duration-300">{{ proyecto.nombre }}</h3>
+                    <p class="text-base-content/70 mb-4">{{ proyecto.descripcion|truncatewords:15 }}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold text-sm">{{ proyecto.cliente }}</span>
+                        <div class="badge badge-primary">Destacado</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'empresa:proyectos' %}" class="btn btn-outline btn-lg">
+                Ver Todos los Proyectos
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Clientes -->
+{% if clientes %}
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold text-base-content mb-6">Nuestros Clientes</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Confiamos en la calidad de nuestro trabajo y nuestros clientes lo confirman.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+            {% for cliente in clientes %}
+            <div class="text-center group">
+                {% if cliente.logo %}
+                    <div class="card bg-base-100 p-6 shadow-md group-hover:shadow-lg transition-all duration-300 border border-base-300 group-hover:border-primary/30">
+                        <img src="{{ cliente.logo.url }}" alt="{{ cliente.nombre }}" class="h-12 w-auto mx-auto filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                    </div>
+                {% else %}
+                    <div class="card bg-base-100 p-4 shadow-md group-hover:shadow-lg transition-all duration-300 border border-base-300 group-hover:border-primary/30">
+                        <h6 class="text-base-content/70 font-semibold text-sm group-hover:text-primary transition-colors duration-300">{{ cliente.nombre }}</h6>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'empresa:clientes' %}" class="btn btn-outline btn-lg">
+                Ver Todos los Clientes
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Estadísticas -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="stat bg-base-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30">
+                <div class="stat-value text-primary text-4xl font-bold">21+</div>
+                <div class="stat-title text-base-content/70 font-semibold">Años de Experiencia</div>
+            </div>
+            <div class="stat bg-base-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30">
+                <div class="stat-value text-primary text-4xl font-bold">100+</div>
+                <div class="stat-title text-base-content/70 font-semibold">Proyectos Completados</div>
+            </div>
+            <div class="stat bg-base-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30">
+                <div class="stat-value text-primary text-4xl font-bold">50+</div>
+                <div class="stat-title text-base-content/70 font-semibold">Clientes Satisfechos</div>
+            </div>
+            <div class="stat bg-base-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30">
+                <div class="stat-value text-primary text-4xl font-bold">2</div>
+                <div class="stat-title text-base-content/70 font-semibold">Países de Operación</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-primary text-primary-content">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-4xl lg:text-5xl font-bold">¿Listo para tu próximo proyecto?</h2>
+                <p class="text-xl text-primary-content/80 leading-relaxed">
+                    Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar tus objetivos con soluciones eficientes y profesionales.
+                </p>
+            </div>
+            <div class="text-center lg:text-right">
+                <a href="{% url 'empresa:contacto' %}" class="btn btn-secondary btn-lg">
+                    Comenzar Ahora
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Diseño Moderno - TEKON RedLine</title>
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-tekon-gray-50">
+    <!-- Navigation -->
+    <nav class="nav-tekon fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="flex items-center space-x-3 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-tekon-red to-tekon-red-dark rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <i class="fas fa-crosshairs text-white text-lg"></i>
+                        </div>
+                        <div class="text-tekon-black font-bold text-2xl">
+                            <span class="text-tekon-red">TEKON</span> <span class="text-tekon-gray-dark">RedLine</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="#" class="text-tekon-gray-dark hover:text-tekon-red px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-tekon-red/5 text-tekon-red bg-tekon-red/10">
+                            Inicio
+                        </a>
+                        <a href="#" class="text-tekon-gray-dark hover:text-tekon-red px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-tekon-red/5">
+                            Servicios
+                        </a>
+                        <a href="#" class="text-tekon-gray-dark hover:text-tekon-red px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-tekon-red/5">
+                            Proyectos
+                        </a>
+                        <a href="#" class="btn-tekon-primary ml-4">
+                            <i class="fas fa-phone mr-2"></i>Contacto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="hero-tekon py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <h1 class="text-5xl lg:text-6xl font-bold text-white leading-tight">
+                            Soluciones <span class="text-tekon-red">Eficientes</span> en Ingeniería
+                        </h1>
+                        <p class="text-xl text-gray-300 leading-relaxed">
+                            Más de 21 años de experiencia en ingeniería, construcción y supervisión. 
+                            Especialistas en proyectos de infraestructura y telecomunicaciones.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button class="btn-tekon-primary text-lg px-8 py-4">
+                                <i class="fas fa-rocket mr-2"></i>Nuestros Servicios
+                            </button>
+                            <button class="btn-tekon-outline text-lg px-8 py-4">
+                                <i class="fas fa-play mr-2"></i>Ver Proyectos
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-tekon-red/20 to-tekon-red-dark/20 rounded-2xl p-8 backdrop-blur-sm">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="stat-tekon">
+                                    <div class="stat-number">150+</div>
+                                    <div class="stat-label">Proyectos Completados</div>
+                                </div>
+                                <div class="stat-tekon">
+                                    <div class="stat-number">21+</div>
+                                    <div class="stat-label">Años de Experiencia</div>
+                                </div>
+                                <div class="stat-tekon">
+                                    <div class="stat-number">98%</div>
+                                    <div class="stat-label">Satisfacción Cliente</div>
+                                </div>
+                                <div class="stat-tekon">
+                                    <div class="stat-number">24/7</div>
+                                    <div class="stat-label">Soporte Técnico</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-tekon-black mb-6">Nuestros Servicios</h2>
+                    <p class="text-xl text-tekon-gray max-w-3xl mx-auto">
+                        Ofrecemos soluciones integrales en ingeniería, construcción y supervisión 
+                        con los más altos estándares de calidad y eficiencia.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card group">
+                        <div class="w-16 h-16 bg-tekon-red/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tekon-red/20 transition-colors duration-300">
+                            <i class="fas fa-cogs text-tekon-red text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-tekon-black mb-4">Ingeniería</h3>
+                        <p class="text-tekon-gray mb-6 leading-relaxed">
+                            Diseño y desarrollo de proyectos de ingeniería con tecnología de vanguardia 
+                            y metodologías probadas.
+                        </p>
+                        <a href="#" class="text-tekon-red font-semibold hover:text-tekon-red-dark transition-colors duration-300 flex items-center group">
+                            Más información <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="service-card group">
+                        <div class="w-16 h-16 bg-tekon-blue/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tekon-blue/20 transition-colors duration-300">
+                            <i class="fas fa-building text-tekon-blue text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-tekon-black mb-4">Construcción</h3>
+                        <p class="text-tekon-gray mb-6 leading-relaxed">
+                            Ejecución de proyectos de construcción con materiales de primera calidad 
+                            y mano de obra especializada.
+                        </p>
+                        <a href="#" class="text-tekon-blue font-semibold hover:text-tekon-blue-dark transition-colors duration-300 flex items-center group">
+                            Más información <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="service-card group">
+                        <div class="w-16 h-16 bg-tekon-orange/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tekon-orange/20 transition-colors duration-300">
+                            <i class="fas fa-eye text-tekon-orange text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-tekon-black mb-4">Supervisión</h3>
+                        <p class="text-tekon-gray mb-6 leading-relaxed">
+                            Supervisión técnica especializada para garantizar la calidad y cumplimiento 
+                            de estándares en cada proyecto.
+                        </p>
+                        <a href="#" class="text-tekon-orange font-semibold hover:text-tekon-orange-dark transition-colors duration-300 flex items-center group">
+                            Más información <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyectos Destacados -->
+        <section class="py-20 bg-tekon-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-tekon-black mb-6">Proyectos Destacados</h2>
+                    <p class="text-xl text-tekon-gray max-w-3xl mx-auto">
+                        Conoce algunos de nuestros proyectos más importantes y el impacto 
+                        que han tenido en la infraestructura del país.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-tekon group overflow-hidden">
+                        <div class="h-48 bg-gradient-to-br from-tekon-red to-tekon-red-dark flex items-center justify-center">
+                            <i class="fas fa-tower-broadcast text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-tekon-black mb-2">Red de Telecomunicaciones</h3>
+                            <p class="text-tekon-gray mb-4">Implementación de red de fibra óptica en Santiago</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-tekon-red font-semibold">2024</span>
+                                <a href="#" class="text-tekon-red hover:text-tekon-red-dark transition-colors duration-300">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-tekon group overflow-hidden">
+                        <div class="h-48 bg-gradient-to-br from-tekon-blue to-tekon-blue-dark flex items-center justify-center">
+                            <i class="fas fa-industry text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-tekon-black mb-2">Complejo Industrial</h3>
+                            <p class="text-tekon-gray mb-4">Construcción de planta industrial en Valparaíso</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-tekon-blue font-semibold">2023</span>
+                                <a href="#" class="text-tekon-blue hover:text-tekon-blue-dark transition-colors duration-300">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-tekon group overflow-hidden">
+                        <div class="h-48 bg-gradient-to-br from-tekon-orange to-tekon-orange-dark flex items-center justify-center">
+                            <i class="fas fa-road text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-tekon-black mb-2">Infraestructura Vial</h3>
+                            <p class="text-tekon-gray mb-4">Mejoramiento de carretera principal en el sur</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-tekon-orange font-semibold">2023</span>
+                                <a href="#" class="text-tekon-orange hover:text-tekon-orange-dark transition-colors duration-300">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-tekon-red to-tekon-red-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold text-white mb-6">¿Listo para tu próximo proyecto?</h2>
+                <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                    Contáctanos y descubre cómo podemos ayudarte a hacer realidad tu visión 
+                    con soluciones de ingeniería de clase mundial.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-tekon-red hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-phone mr-2"></i>Llamar Ahora
+                    </button>
+                    <button class="border-2 border-white text-white hover:bg-white hover:text-tekon-red font-semibold py-4 px-8 rounded-lg transition-all duration-300">
+                        <i class="fas fa-envelope mr-2"></i>Enviar Email
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="hero-tekon py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Empresa Info -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-tekon-red to-tekon-red-dark rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-crosshairs text-white text-lg"></i>
+                        </div>
+                        <div class="text-white font-bold text-2xl">
+                            <span class="text-tekon-red">TEKON</span> <span class="text-white">RedLine</span>
+                        </div>
+                    </div>
+                    <p class="text-tekon-red font-bold text-xl">SOLUCIONES EFICIENTES</p>
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        Especializados en ingeniería, construcción y supervisión con más de 21 años de experiencia en el mercado chileno.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-tekon-red hover:bg-tekon-red-dark rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-tekon-red hover:bg-tekon-red-dark rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-tekon-red hover:bg-tekon-red-dark rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Servicios -->
+                <div class="space-y-6">
+                    <h5 class="text-tekon-red font-bold text-xl">Servicios</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-tekon-red transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-tekon-red mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Ingeniería
+                        </a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-tekon-red transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-tekon-red mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Construcción
+                        </a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-tekon-red transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-tekon-red mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Supervisión
+                        </a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-tekon-red transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-tekon-red mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Fiscalización
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contacto -->
+                <div class="space-y-6">
+                    <h5 class="text-tekon-red font-bold text-xl">Contacto</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-tekon-red/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-map-marker-alt text-tekon-red text-sm"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm leading-relaxed">
+                                C. Carlos Antúnez 2025, Piso 9-904 – PROVIDENCIA – Santiago de Chile
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 bg-tekon-red/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-tekon-red text-sm"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">+56 9 3494 9214</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 bg-tekon-red/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-tekon-red text-sm"></i>
+                            </div>
+                            <span class="text-gray-300 text-sm">mlujan@tekon-rl.cl</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div class="border-t border-gray-600 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2024 TEKON RedLine. Todos los derechos reservados.
+                    </p>
+                    <p class="text-gray-400 text-sm flex items-center">
+                        Desarrollado con <i class="fas fa-heart text-tekon-red mx-1"></i> para la excelencia en ingeniería
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

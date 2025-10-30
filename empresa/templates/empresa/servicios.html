@@ -1,0 +1,247 @@
+{% extends 'empresa/base.html' %}
+{% load static %}
+
+{% block title %}Servicios - {{ empresa.nombre|default:"TK REDLINE SPA" }}{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-6">
+                Nuestros Servicios
+            </h1>
+            <p class="text-xl text-primary-content/80 max-w-3xl mx-auto leading-relaxed">
+                Soluciones integrales en ingeniería, construcción y supervisión con más de 21 años de experiencia 
+                respaldando cada proyecto con excelencia y compromiso.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios List -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for servicio in servicios %}
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-start space-x-6">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+                        {% if servicio.icono %}
+                            <i class="{{ servicio.icono }} text-primary text-2xl"></i>
+                        {% else %}
+                            <i class="fas fa-cogs text-primary text-2xl"></i>
+                        {% endif %}
+                    </div>
+                    <div class="flex-1">
+                        <h5 class="text-2xl font-bold text-base-content mb-4">{{ servicio.nombre }}</h5>
+                        <p class="text-base-content/70 leading-relaxed text-lg">{{ servicio.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-20">
+                <div class="w-24 h-24 bg-neutral/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                    <i class="fas fa-tools text-neutral text-4xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-base-content mb-4">Servicios en desarrollo</h4>
+                <p class="text-base-content/70 text-lg">Estamos preparando la información detallada de nuestros servicios.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Servicios Detallados -->
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Áreas de Especialización</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Nuestra experiencia abarca múltiples disciplinas de la ingeniería y construcción.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Administración y Gerenciamiento -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <i class="fas fa-project-diagram text-primary text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Administración y Gerenciamiento</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Optimización de recursos, cumplimiento de normas y gestión integral de proyectos de infraestructura.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Optimización de recursos
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Cumplimiento de normas
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Gestión integral
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Tecnología e innovación
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Supervisión y Fiscalización -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/20 transition-colors duration-300">
+                        <i class="fas fa-clipboard-check text-secondary text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Supervisión y Fiscalización</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Control de calidad, seguimiento de proyectos y cumplimiento de especificaciones técnicas.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Control de calidad
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Seguimiento de proyectos
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Cumplimiento de especificaciones
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Gestión de seguridad
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Diseño de Ingeniería -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors duration-300">
+                        <i class="fas fa-drafting-compass text-accent text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Diseño de Ingeniería</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Ingeniería conceptual, básica y de detalle para proyectos de infraestructura e industrial.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Ingeniería conceptual
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Ingeniería básica
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Ingeniería de detalle
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Sistemas eléctricos
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Construcción -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-neutral/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-neutral/20 transition-colors duration-300">
+                        <i class="fas fa-hard-hat text-neutral text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Construcción</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Construcción de obras de infraestructura básica e industrial con materiales modernos.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Infraestructura básica
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Obras industriales
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Edificios y plantas
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Telecomunicaciones
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Auditorías Técnicas -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <i class="fas fa-search text-primary text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Auditorías Técnicas</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Evaluación y verificación del cumplimiento de contratos y especificaciones técnicas.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Evaluación de contratos
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Control de cronogramas
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Revisión de modificaciones
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Informes mensuales
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Capacitaciones -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/20 transition-colors duration-300">
+                        <i class="fas fa-graduation-cap text-secondary text-3xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Capacitaciones Técnicas</h5>
+                    <p class="text-base-content/70 mb-6 leading-relaxed">
+                        Formación especializada en gerenciamiento, administración y construcción de proyectos.
+                    </p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Gerenciamiento
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Administración
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Construcción
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Proyectos públicos
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold mb-6">¿Necesitas alguno de nuestros servicios?</h2>
+            <p class="text-xl text-primary-content/80 mb-8 max-w-3xl mx-auto">
+                Contáctanos para una consulta personalizada y descubre cómo podemos ayudarte con tu proyecto.
+            </p>
+            <a href="{% url 'empresa:contacto' %}" class="btn btn-secondary text-lg px-8 py-4">
+                <i class="fas fa-phone mr-2"></i>Solicitar Cotización
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

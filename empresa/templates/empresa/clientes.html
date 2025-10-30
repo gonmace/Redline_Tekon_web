@@ -1,0 +1,331 @@
+{% extends 'empresa/base.html' %}
+{% load static %}
+
+{% block title %}Clientes - {{ empresa.nombre|default:"TK REDLINE SPA" }}{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-6">
+                Nuestros Clientes
+            </h1>
+            <p class="text-xl text-primary-content/80 max-w-3xl mx-auto leading-relaxed">
+                La confianza de nuestros clientes es nuestro mayor logro. 
+                Más de 21 años de experiencia respaldan nuestra reputación en el mercado.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Clientes Directos -->
+{% if clientes_directos %}
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Clientes Directos</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Empresas que confían directamente en nuestros servicios de ingeniería, construcción y supervisión.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {% for cliente in clientes_directos %}
+            <div class="card bg-base-100 shadow-lg p-6 text-center group hover:shadow-xl transition-all duration-300">
+                {% if cliente.logo %}
+                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <img src="{{ cliente.logo.url }}" alt="{{ cliente.nombre }}" class="client-logo mx-auto h-16 object-contain">
+                    </div>
+                {% else %}
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <i class="fas fa-building text-primary text-2xl"></i>
+                    </div>
+                {% endif %}
+                <h6 class="text-lg font-bold text-base-content mb-3">{{ cliente.nombre }}</h6>
+                {% if cliente.descripcion %}
+                    <p class="text-base-content/70 text-sm leading-relaxed">{{ cliente.descripcion|truncatewords:15 }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Clientes Finales -->
+{% if clientes_finales %}
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Clientes Finales</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Organizaciones que se benefician directamente de nuestros proyectos de infraestructura.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {% for cliente in clientes_finales %}
+            <div class="card bg-base-100 shadow-lg p-6 text-center group hover:shadow-xl transition-all duration-300">
+                {% if cliente.logo %}
+                    <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <img src="{{ cliente.logo.url }}" alt="{{ cliente.nombre }}" class="client-logo mx-auto h-16 object-contain">
+                    </div>
+                {% else %}
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/20 transition-colors duration-300">
+                        <i class="fas fa-building text-secondary text-2xl"></i>
+                    </div>
+                {% endif %}
+                <h6 class="text-lg font-bold text-base-content mb-3">{{ cliente.nombre }}</h6>
+                {% if cliente.descripcion %}
+                    <p class="text-base-content/70 text-sm leading-relaxed">{{ cliente.descripcion|truncatewords:15 }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Clientes Destacados -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Clientes Destacados</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                Algunos de nuestros clientes más importantes a nivel nacional e internacional.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Phoenix Tower International -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-broadcast-tower text-primary-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Phoenix Tower International</h5>
+                    <p class="text-base-content/70 mb-6">Cliente internacional especializado en infraestructura de telecomunicaciones.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>64 Sitios de Telecomunicaciones
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Supervisión de Construcción
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Desarrollo de Software
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Consultoría ESMS
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- SpaceX -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-neutral rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-rocket text-neutral-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">SpaceX</h5>
+                    <p class="text-base-content/70 mb-6">Empresa aeroespacial líder en tecnología satelital.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>3 Telepuertos
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Bases Satelitales
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Control de Calidad HSE
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Buenos Aires y Bahía Blanca
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cambridge College -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-info rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-school text-info-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">Cambridge College</h5>
+                    <p class="text-base-content/70 mb-6">Institución educativa de prestigio internacional.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Teatro Coliseo
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Edificios de Laboratorios
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Estudios de Factibilidad
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Auditorías Técnicas
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- ENDE Corani -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-solar-panel text-accent-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">ENDE Corani</h5>
+                    <p class="text-base-content/70 mb-6">Empresa estatal de energía de Bolivia.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Planta Solar Fotovoltaica
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Ingeniería Básica
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Estudios Topográficos
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Diseño de Accesos
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- ENTEL Chile -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-phone text-secondary-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">ENTEL Chile</h5>
+                    <p class="text-base-content/70 mb-6">Operador de telecomunicaciones líder en Chile.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Carreteras y Rutas
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Infraestructura de Red
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Proyectos de Cobertura
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Desarrollo de Software
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- CITSA -->
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-neutral rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-industry text-neutral-content text-2xl"></i>
+                    </div>
+                    <h5 class="text-xl font-bold text-base-content mb-4">CITSA</h5>
+                    <p class="text-base-content/70 mb-6">Compañía Industrial de Tabacos S.A.</p>
+                    <ul class="space-y-3 text-left">
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Parque Industrial
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Supervisión de Infraestructura
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Edificio 4 Niveles
+                        </li>
+                        <li class="flex items-center text-base-content/70">
+                            <i class="fas fa-check text-primary mr-3"></i>Tinglado 2000 m²
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonios -->
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-base-content mb-4">Lo que dicen nuestros clientes</h2>
+            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+                La satisfacción de nuestros clientes es nuestra mejor carta de presentación.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-quote-left text-primary text-2xl"></i>
+                    </div>
+                    <p class="text-base-content/70 mb-6 leading-relaxed text-lg">
+                        "TK REDLINE SPA ha demostrado ser un socio confiable en nuestros proyectos de telecomunicaciones. Su profesionalismo y atención al detalle son excepcionales."
+                    </p>
+                    <div class="border-t border-base-300 pt-6">
+                        <h6 class="font-bold text-base-content mb-1">Phoenix Tower International</h6>
+                        <small class="text-base-content/70">Cliente Internacional</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-quote-left text-primary text-2xl"></i>
+                    </div>
+                    <p class="text-base-content/70 mb-6 leading-relaxed text-lg">
+                        "La calidad de su trabajo en supervisión y fiscalización ha superado nuestras expectativas. Recomendamos sus servicios sin dudarlo."
+                    </p>
+                    <div class="border-t border-base-300 pt-6">
+                        <h6 class="font-bold text-base-content mb-1">Cambridge College</h6>
+                        <small class="text-base-content/70">Institución Educativa</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-quote-left text-primary text-2xl"></i>
+                    </div>
+                    <p class="text-base-content/70 mb-6 leading-relaxed text-lg">
+                        "Su experiencia en proyectos de energía renovable y su compromiso con la sostenibilidad los hace únicos en el mercado."
+                    </p>
+                    <div class="border-t border-base-300 pt-6">
+                        <h6 class="font-bold text-base-content mb-1">ENDE Corani</h6>
+                        <small class="text-base-content/70">Empresa de Energía</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-primary text-primary-content">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-6">¿Quieres ser nuestro próximo cliente?</h2>
+                <p class="text-xl text-primary-content/80 leading-relaxed">
+                    Únete a la lista de empresas que confían en TK REDLINE SPA para sus proyectos más importantes.
+                </p>
+            </div>
+            <div class="text-center lg:text-right">
+                <a href="{% url 'empresa:contacto' %}" class="btn btn-secondary btn-lg">Comenzar Proyecto</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

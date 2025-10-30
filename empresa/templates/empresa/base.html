@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% if configuracion %}{{ configuracion.titulo_sitio }}{% else %}TK REDLINE SPA{% endif %}{% endblock %}</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="{% block description %}{% if configuracion %}{{ configuracion.descripcion_sitio }}{% else %}TK REDLINE SPA - Soluciones Eficientes en Ingeniería, Construcción y Supervisión{% endif %}{% endblock %}">
+    <meta name="keywords" content="{% if configuracion %}{{ configuracion.palabras_clave }}{% else %}ingeniería, construcción, supervisión, fiscalización, telecomunicaciones, infraestructura{% endif %}">
+    
+    {% load static %}
+    <!-- Tailwind CSS v4 Compiled -->
+    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+    <body class="bg-base-100 text-base-content" data-theme="light">
+        <!-- Navigation -->
+        <nav class="bg-base-100/95 backdrop-blur-sm shadow-lg border-b border-base-300 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="{% url 'empresa:home' %}" class="flex items-center space-x-3 group">
+                        {% if empresa and empresa.logo %}
+                            <img src="{{ empresa.logo.url }}" alt="{{ empresa.nombre }}" class="h-12 group-hover:scale-105 transition-transform duration-300">
+                        {% else %}
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                    <i class="fas fa-crosshairs text-primary-content text-lg"></i>
+                                </div>
+                            <div class="text-base-content font-bold text-2xl">
+                                <span class="text-primary">TEKON</span> <span class="text-base-content/70">RedLine</span>
+                            </div>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                            <a href="{% url 'empresa:home' %}" class="text-base-content/70 hover:text-primary px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'home' %}text-primary bg-primary/10{% endif %}">
+                                Inicio
+                            </a>
+                            <a href="{% url 'empresa:sobre_nosotros' %}" class="text-base-content/70 hover:text-primary px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'sobre_nosotros' %}text-primary bg-primary/10{% endif %}">
+                                Sobre Nosotros
+                            </a>
+                        <div class="relative group">
+                            <button class="text-base-content/70 hover:text-primary px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary/5 flex items-center {% if request.resolver_match.url_name in 'servicios,proyectos,clientes' %}text-primary bg-primary/10{% endif %}">
+                                Servicios
+                                <i class="fas fa-chevron-down ml-2 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                            </button>
+                            <div class="absolute left-0 mt-2 w-56 bg-base-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-base-300">
+                                <div class="py-2">
+                                    <a href="{% url 'empresa:servicios' %}" class="block px-4 py-3 text-sm text-base-content/70 hover:bg-primary/5 hover:text-primary transition-colors duration-200">
+                                        <i class="fas fa-cogs mr-3 text-primary"></i>Nuestros Servicios
+                                    </a>
+                                    <a href="{% url 'empresa:proyectos' %}" class="block px-4 py-3 text-sm text-base-content/70 hover:bg-primary/5 hover:text-primary transition-colors duration-200">
+                                        <i class="fas fa-building mr-3 text-primary"></i>Proyectos
+                                    </a>
+                                    <a href="{% url 'empresa:clientes' %}" class="block px-4 py-3 text-sm text-base-content/70 hover:bg-primary/5 hover:text-primary transition-colors duration-200">
+                                        <i class="fas fa-handshake mr-3 text-primary"></i>Clientes
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'empresa:equipo' %}" class="text-base-content/70 hover:text-primary px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'equipo' %}text-primary bg-primary/10{% endif %}">
+                            Equipo
+                        </a>
+                        <button id="theme-toggle" class="btn btn-outline ml-3">
+                            <i class="fas fa-moon mr-2"></i><span>Tema</span>
+                        </button>
+                        <a href="{% url 'empresa:contacto' %}" class="btn btn-primary ml-4">
+                            <i class="fas fa-phone mr-2"></i>Contacto
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-base-content/70 hover:text-primary focus:outline-none focus:text-primary p-2 rounded-lg hover:bg-primary/5 transition-all duration-300" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-4 pt-2 pb-4 space-y-2 bg-base-100 border-t border-base-300 shadow-lg">
+                <a href="{% url 'empresa:home' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'home' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-home mr-3"></i>Inicio
+                </a>
+                <a href="{% url 'empresa:sobre_nosotros' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'sobre_nosotros' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-info-circle mr-3"></i>Sobre Nosotros
+                </a>
+                <a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'servicios' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-cogs mr-3"></i>Servicios
+                </a>
+                <a href="{% url 'empresa:proyectos' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'proyectos' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-building mr-3"></i>Proyectos
+                </a>
+                <a href="{% url 'empresa:clientes' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'clientes' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-handshake mr-3"></i>Clientes
+                </a>
+                <a href="{% url 'empresa:equipo' %}" class="text-base-content/70 hover:text-primary block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-primary/5 {% if request.resolver_match.url_name == 'equipo' %}text-primary bg-primary/10{% endif %}">
+                    <i class="fas fa-users mr-3"></i>Equipo
+                </a>
+                <a href="{% url 'empresa:contacto' %}" class="btn btn-primary w-full text-center mt-4">
+                    <i class="fas fa-phone mr-2"></i>Contacto
+                </a>
+                <!-- Theme Toggle for Mobile -->
+                <button id="mobile-theme-toggle" class="btn btn-outline w-full text-center mt-2">
+                    <i class="fas fa-moon mr-2"></i><span>Tema</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        {% block content %}{% endblock %}
+    </main>
+
+        <!-- Footer -->
+        <footer class="bg-base-200 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Empresa Info -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-crosshairs text-primary-content text-lg"></i>
+                        </div>
+                            <div class="text-base-content font-bold text-2xl">
+                                <span class="text-primary">TEKON</span> <span class="text-base-content">RedLine</span>
+                            </div>
+                        </div>
+                        <p class="text-primary font-bold text-xl">
+                            {% if empresa %}{{ empresa.slogan }}{% else %}SOLUCIONES EFICIENTES{% endif %}
+                        </p>
+                        <p class="text-base-content/70 text-base leading-relaxed">
+                        {% if empresa %}{{ empresa.descripcion|truncatewords:25 }}{% else %}Especializados en ingeniería, construcción y supervisión con más de 21 años de experiencia en el mercado chileno.{% endif %}
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn btn-primary btn-circle">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-primary btn-circle">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-primary btn-circle">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Servicios -->
+                <div class="space-y-6">
+                    <h5 class="text-primary font-bold text-xl">Servicios</h5>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Ingeniería
+                        </a></li>
+                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Construcción
+                        </a></li>
+                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Supervisión
+                        </a></li>
+                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                            <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Fiscalización
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contacto -->
+                <div class="space-y-6">
+                    <h5 class="text-primary font-bold text-xl">Contacto</h5>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-map-marker-alt text-primary text-sm"></i>
+                            </div>
+                            <span class="text-base-content/70 text-sm leading-relaxed">
+                                {% if empresa %}{{ empresa.direccion }}{% else %}C. Carlos Antúnez 2025, Piso 9-904 – PROVIDENCIA – Santiago de Chile{% endif %}
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-primary text-sm"></i>
+                            </div>
+                            <span class="text-base-content/70 text-sm">
+                                {% if empresa %}{{ empresa.telefono }}{% else %}+56 9 3494 9214{% endif %}
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-primary text-sm"></i>
+                            </div>
+                            <span class="text-base-content/70 text-sm">
+                                {% if empresa %}{{ empresa.email_principal }}{% else %}mlujan@tekon-rl.cl{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div class="border-t border-base-300 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-base-content/60 text-sm">
+                        &copy; {% now "Y" %} {% if empresa %}{{ empresa.nombre }}{% else %}TEKON RedLine{% endif %}. Todos los derechos reservados.
+                    </p>
+                    <p class="text-base-content/60 text-sm flex items-center">
+                        Desarrollado con <i class="fas fa-heart text-primary mx-1"></i> para la excelencia en ingeniería
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // DaisyUI theme toggle (light / dark)
+        (function() {
+            const root = document.documentElement;
+            const storageKey = 'theme';
+            const saved = localStorage.getItem(storageKey);
+            const fallback = 'light';
+            const initial = saved || fallback;
+            root.setAttribute('data-theme', initial);
+            
+            // También actualizar el body para consistencia
+            document.body.setAttribute('data-theme', initial);
+
+            const btn = document.getElementById('theme-toggle');
+            const mobileBtn = document.getElementById('mobile-theme-toggle');
+            
+            const setBtnIcon = (theme) => {
+                if (btn) {
+                    btn.innerHTML = (theme === 'dark')
+                        ? '<i class="fas fa-sun mr-2"></i><span>Tema</span>'
+                        : '<i class="fas fa-moon mr-2"></i><span>Tema</span>';
+                }
+                if (mobileBtn) {
+                    mobileBtn.innerHTML = (theme === 'dark')
+                        ? '<i class="fas fa-sun mr-2"></i><span>Tema</span>'
+                        : '<i class="fas fa-moon mr-2"></i><span>Tema</span>';
+                }
+            };
+            setBtnIcon(initial);
+
+            const toggleTheme = () => {
+                const current = root.getAttribute('data-theme') || fallback;
+                const next = current === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                document.body.setAttribute('data-theme', next);
+                localStorage.setItem(storageKey, next);
+                setBtnIcon(next);
+            };
+
+            if (btn) {
+                btn.addEventListener('click', toggleTheme);
+            }
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', toggleTheme);
+            }
+        })();
+    </script>
+    <script src="{% static 'empresa/js/main.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

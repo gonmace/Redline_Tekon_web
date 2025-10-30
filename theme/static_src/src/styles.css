@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
+
+/* Configuración de DaisyUI */
+@plugin "daisyui";
+
+/* Variables personalizadas TEKON - Fuera de @layer para mayor especificidad */
+/* Tema personalizado TEKON para light */
+[data-theme="light"] {
+  /* Primary/Secondary/Accent */
+  --color-primary: #dc2626 !important;
+  --color-primary-content: #ffffff !important;
+  --color-secondary: #059669 !important;
+  --color-secondary-content: #ffffff !important;
+  --color-accent: #ea580c !important;
+  --color-accent-content: #ffffff !important;
+
+  /* Neutral and base */
+  --color-neutral: #0f172a !important;
+  --color-neutral-content: #e5e7eb !important;
+  --color-base-100: #f8fafc !important;
+  --color-base-200: #eef2f7 !important;
+  --color-base-300: #e3e9f1 !important;
+  --color-base-content: #0f172a !important;
+
+  /* Info/Success/Warning/Error */
+  --color-info: #0284c7 !important;
+  --color-success: #059669 !important;
+  --color-warning: #d97706 !important;
+  --color-error: #dc2626 !important;
+}
+
+/* Tema personalizado TEKON para dark */
+[data-theme="dark"] {
+  --color-primary: #dc2626 !important;
+  --color-primary-content: #ffffff !important;
+  --color-secondary: #10b981 !important;
+  --color-secondary-content: #ffffff !important;
+  --color-accent: #fb923c !important;
+  --color-accent-content: #1b1007 !important;
+
+  --color-neutral: #0b1220 !important;
+  --color-neutral-content: #cfd8e3 !important;
+  --color-base-100: #0b1220 !important;
+  --color-base-200: #0f172a !important;
+  --color-base-300: #111827 !important;
+  --color-base-content: #e5e7eb !important;
+
+  --color-info: #38bdf8 !important;
+  --color-success: #10b981 !important;
+  --color-warning: #fbbf24 !important;
+  --color-error: #f87171 !important;
+}
+
+/* Estilos base personalizados */
+@layer base {
+
+  /* Tema por defecto */
+  html {
+    @apply bg-base-100 text-base-content;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base-100 text-base-content;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    @apply text-base-content;
+  }
+
+  /* Mejoras para tarjetas en modo oscuro */
+  [data-theme="dark"] .card {
+    background-color: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  [data-theme="dark"] .card:hover {
+    background-color: #374151 !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Mejoras específicas para tarjetas de servicios en modo oscuro */
+  [data-theme="dark"] .bg-base-100 {
+    background-color: #1f2937 !important;
+  }
+
+  /* Mejoras para secciones con fondo base-200 en modo oscuro */
+  [data-theme="dark"] .bg-base-200 {
+    background-color: #111827 !important;
+  }
+
+  /* Mejoras para bordes en modo oscuro */
+  [data-theme="dark"] .border-base-300 {
+    border-color: #374151 !important;
+  }
+
+  [data-theme="dark"] .hover\:border-primary\/30:hover {
+    border-color: rgba(220, 38, 38, 0.3) !important;
+  }
+
+  /* Mejoras para botones en modo oscuro */
+  [data-theme="dark"] .btn-outline {
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+  }
+
+  [data-theme="dark"] .btn-outline:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-primary-content) !important;
+  }
+
+  /* Mejoras para gradientes en modo oscuro */
+  [data-theme="dark"] .bg-gradient-to-br {
+    background: linear-gradient(to bottom right, var(--color-base-200), var(--color-base-300)) !important;
+  }
+
+  /* Mejoras para sombras en modo oscuro */
+  [data-theme="dark"] .shadow-xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  [data-theme="dark"] .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+  }
+}

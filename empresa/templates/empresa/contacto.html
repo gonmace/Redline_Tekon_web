@@ -1,0 +1,259 @@
+{% extends 'empresa/base.html' %}
+{% load static %}
+
+{% block title %}Contacto - {{ empresa.nombre|default:"TK REDLINE SPA" }}{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-primary text-primary-content py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-6">
+                Contáctanos
+            </h1>
+            <p class="text-xl text-primary-content/80 max-w-3xl mx-auto leading-relaxed">
+                Estamos aquí para ayudarte con tu próximo proyecto. ¡Hablemos sobre cómo podemos 
+                hacer realidad tu visión con soluciones de ingeniería de clase mundial!
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Contact Form -->
+            <div class="lg:col-span-2">
+                <div class="card bg-base-100 shadow-lg p-8">
+                    <h3 class="text-3xl font-bold text-base-content mb-6">Envíanos un Mensaje</h3>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} mb-6 p-4 rounded-lg">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="post" id="contactForm" class="space-y-6">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-control">
+                                <label for="nombre" class="label">
+                                    <span class="label-text text-base-content font-semibold">Nombre Completo *</span>
+                                </label>
+                                <input type="text" class="input input-bordered w-full" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-control">
+                                <label for="email" class="label">
+                                    <span class="label-text text-base-content font-semibold">Email *</span>
+                                </label>
+                                <input type="email" class="input input-bordered w-full" id="email" name="email" required>
+                            </div>
+                            <div class="form-control">
+                                <label for="telefono" class="label">
+                                    <span class="label-text text-base-content font-semibold">Teléfono</span>
+                                </label>
+                                <input type="tel" class="input input-bordered w-full" id="telefono" name="telefono">
+                            </div>
+                            <div class="form-control">
+                                <label for="empresa" class="label">
+                                    <span class="label-text text-base-content font-semibold">Empresa</span>
+                                </label>
+                                <input type="text" class="input input-bordered w-full" id="empresa" name="empresa">
+                            </div>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="asunto" class="label">
+                                <span class="label-text text-base-content font-semibold">Asunto *</span>
+                            </label>
+                            <input type="text" class="input input-bordered w-full" id="asunto" name="asunto" required>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="mensaje" class="label">
+                                <span class="label-text text-base-content font-semibold">Mensaje *</span>
+                            </label>
+                            <textarea class="textarea textarea-bordered w-full h-32" id="mensaje" name="mensaje" required></textarea>
+                        </div>
+                        
+                        <div class="form-control">
+                            <button type="submit" class="btn btn-primary w-full">
+                                <i class="fas fa-paper-plane mr-2"></i>Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="space-y-8">
+                <div class="card bg-base-100 shadow-lg p-8">
+                    <h4 class="text-2xl font-bold text-base-content mb-6">Información de Contacto</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-base-content mb-2">Dirección</h6>
+                                <p class="text-base-content/70 leading-relaxed">
+                                    {% if empresa %}{{ empresa.direccion }}{% else %}
+                                    C. Carlos Antúnez 2025, Piso 9-904<br>
+                                    PROVIDENCIA - Santiago de Chile
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-base-content mb-2">Teléfono</h6>
+                                <a href="tel:{% if empresa %}{{ empresa.telefono }}{% else %}+56934949214{% endif %}" 
+                                   class="text-primary hover:text-primary/80 transition-colors duration-300 font-semibold">
+                                    {% if empresa %}{{ empresa.telefono }}{% else %}+56 9 3494 9214{% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-base-content mb-2">Email</h6>
+                                <a href="mailto:{% if empresa %}{{ empresa.email_principal }}{% else %}mlujan@tekon-rl.cl{% endif %}" 
+                                   class="text-primary hover:text-primary/80 transition-colors duration-300 font-semibold">
+                                    {% if empresa %}{{ empresa.email_principal }}{% else %}mlujan@tekon-rl.cl{% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-base-content mb-2">Horario de Atención</h6>
+                                <p class="text-base-content/70 leading-relaxed">
+                                    Lunes a Viernes: 9:00 - 18:00<br>
+                                    Sábados: 9:00 - 13:00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="card bg-base-100 shadow-lg p-8">
+                    <h6 class="text-xl font-bold text-base-content mb-6">Síguenos</h6>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-primary hover:bg-primary/80 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin text-primary-content"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-primary hover:bg-primary/80 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook text-primary-content"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-primary hover:bg-primary/80 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram text-primary-content"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-20 bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-base-content mb-4">Nuestra Ubicación</h3>
+            <p class="text-xl text-base-content/70">Encuéntranos en el corazón de Providencia, Santiago de Chile</p>
+        </div>
+        
+        <div class="card bg-base-100 shadow-lg p-8 text-center">
+            <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-map-marked-alt text-primary text-3xl"></i>
+            </div>
+            <h5 class="text-2xl font-bold text-base-content mb-4">Mapa Interactivo</h5>
+            <p class="text-base-content/70 mb-6 text-lg">
+                C. Carlos Antúnez 2025, Piso 9-904<br>
+                PROVIDENCIA - Santiago de Chile
+            </p>
+            <a href="https://maps.google.com/?q=Carlos+Antunez+2025+Providencia+Santiago" 
+               target="_blank" class="btn btn-primary">
+                <i class="fas fa-external-link-alt mr-2"></i>Ver en Google Maps
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-base-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-base-content mb-4">Preguntas Frecuentes</h3>
+            <p class="text-xl text-base-content/70">Respuestas a las consultas más comunes sobre nuestros servicios</p>
+        </div>
+        
+        <div class="space-y-4">
+            <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+                <input type="radio" name="faq-accordion" checked="checked" />
+                <div class="collapse-title text-xl font-semibold text-base-content">
+                    ¿Qué tipos de proyectos manejan?
+                </div>
+                <div class="collapse-content">
+                    <p class="text-base-content/70 leading-relaxed">
+                        Trabajamos en proyectos de infraestructura básica e industrial, incluyendo carreteras, urbanizaciones, complejos deportivos, edificios escolares, plantas industriales, infraestructura para telecomunicaciones, y más.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+                <input type="radio" name="faq-accordion" />
+                <div class="collapse-title text-xl font-semibold text-base-content">
+                    ¿Cuál es su experiencia en el sector?
+                </div>
+                <div class="collapse-content">
+                    <p class="text-base-content/70 leading-relaxed">
+                        Contamos con más de 21 años de experiencia en el desarrollo de ingenierías, ejecución de proyectos de construcción, supervisión y fiscalizaciones de proyectos públicos y privados.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+                <input type="radio" name="faq-accordion" />
+                <div class="collapse-title text-xl font-semibold text-base-content">
+                    ¿Trabajan en otros países?
+                </div>
+                <div class="collapse-content">
+                    <p class="text-base-content/70 leading-relaxed">
+                        Sí, tenemos presencia internacional y hemos desarrollado proyectos en países limítrofes como Argentina, trabajando con clientes internacionales en administración de proyectos, desarrollos de ingeniería, supervisión de obras y auditorías técnicas.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+                <input type="radio" name="faq-accordion" />
+                <div class="collapse-title text-xl font-semibold text-base-content">
+                    ¿Cómo puedo solicitar una cotización?
+                </div>
+                <div class="collapse-content">
+                    <p class="text-base-content/70 leading-relaxed">
+                        Puede contactarnos a través del formulario en esta página, por teléfono al +56 9 3494 9214, o por email a mlujan@tekon-rl.cl. Nos pondremos en contacto con usted en un plazo máximo de 24 horas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
