@@ -248,18 +248,18 @@
                 <div class="space-y-6">
                     <h5 class="text-primary font-bold text-xl">Servicios</h5>
                     <ul class="space-y-3">
-                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                        <li>
                             <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Ingeniería
-                        </a></li>
-                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                        </li>
+                        <li>
                             <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Construcción
-                        </a></li>
-                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                        </li>
+                        <li>
                             <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Supervisión
-                        </a></li>
-                        <li><a href="{% url 'empresa:servicios' %}" class="text-base-content/70 hover:text-primary transition-colors duration-300 flex items-center group">
+                        </li>
+                        <li>
                             <i class="fas fa-arrow-right text-primary mr-3 group-hover:translate-x-1 transition-transform duration-300"></i>Fiscalización
-                        </a></li>
+                        </li>
                     </ul>
                 </div>
                 
@@ -299,10 +299,7 @@
             <div class="border-t border-base-300 mt-12 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                     <p class="text-base-content/60 text-sm">
-                        &copy; {% now "Y" %} {% if empresa %}{{ empresa.nombre }}{% else %}TEKON RedLine{% endif %}. Todos los derechos reservados.
-                    </p>
-                    <p class="text-base-content/60 text-sm flex items-center">
-                        Desarrollado con <i class="fas fa-heart text-primary mx-1"></i> para la excelencia en ingeniería
+                        &copy; {% now "Y" %} {% if empresa %}{{ empresa.nombre }}{% else %}RedLineGS{% endif %}. Todos los derechos reservados.
                     </p>
                 </div>
             </div>
