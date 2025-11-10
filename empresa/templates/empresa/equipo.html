@@ -41,86 +41,12 @@
                 {% if miembro.descripcion %}
                     <p class="text-base-content/70 mb-6 leading-relaxed">{{ miembro.descripcion }}</p>
                 {% endif %}
-                <div class="flex justify-center space-x-3">
-                    {% if miembro.email %}
-                        <a href="mailto:{{ miembro.email }}" class="w-10 h-10 bg-primary/10 hover:bg-primary rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fas fa-envelope text-primary"></i>
-                        </a>
-                    {% endif %}
-                    {% if miembro.telefono %}
-                        <a href="tel:{{ miembro.telefono }}" class="w-10 h-10 bg-primary/10 hover:bg-primary rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fas fa-phone text-primary"></i>
-                        </a>
-                    {% endif %}
-                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
-
-<!-- Equipo de Liderazgo -->
-<section class="py-20 bg-base-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-base-content mb-4">Liderazgo Ejecutivo</h2>
-            <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
-                Los fundadores y líderes de TK REDLINE SPA con más de 21 años de experiencia.
-            </p>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- J. Manuel Lujan S. -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
-                    <div class="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                        <i class="fas fa-user-tie text-primary text-4xl"></i>
-                    </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <h4 class="text-2xl font-bold text-base-content mb-2">J. Manuel Lujan S.</h4>
-                        <p class="text-primary font-semibold mb-4 text-lg">Fundador y Director Ejecutivo</p>
-                        <p class="text-base-content/70 mb-6 leading-relaxed">
-                            Ingeniero con más de 21 años de experiencia en proyectos de ingeniería, construcción y supervisión. Líder visionario que ha guiado a TK REDLINE SPA hacia la excelencia y la expansión internacional.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                            <a href="mailto:mlujan@tekon-rl.cl" class="btn btn-outline text-sm">
-                                <i class="fas fa-envelope mr-2"></i>mlujan@tekon-rl.cl
-                            </a>
-                            <a href="mailto:mlujan@redlinegs.com" class="btn btn-outline text-sm">
-                                <i class="fas fa-envelope mr-2"></i>mlujan@redlinegs.com
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Gonzalo J. Martinez C. -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
-                    <div class="w-32 h-32 bg-secondary/10 rounded-full flex items-center justify-center group-hover:bg-secondary/20 transition-colors duration-300">
-                        <i class="fas fa-user-tie text-secondary text-4xl"></i>
-                    </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <h4 class="text-2xl font-bold text-base-content mb-2">Gonzalo J. Martinez C.</h4>
-                        <p class="text-secondary font-semibold mb-4 text-lg">Socio y Director Técnico</p>
-                        <p class="text-base-content/70 mb-6 leading-relaxed">
-                            Ingeniero especializado con amplia experiencia en supervisión de obras y gestión de proyectos. Socio clave en el desarrollo de soluciones eficientes y la expansión de la empresa.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                            <a href="mailto:gmartinez@tekon-rl.cl" class="btn btn-outline text-sm">
-                                <i class="fas fa-envelope mr-2"></i>gmartinez@tekon-rl.cl
-                            </a>
-                            <a href="mailto:gmartinez@redlinegs.com" class="btn btn-outline text-sm">
-                                <i class="fas fa-envelope mr-2"></i>gmartinez@redlinegs.com
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Áreas de Especialización -->
 <section class="py-20 bg-base-100">

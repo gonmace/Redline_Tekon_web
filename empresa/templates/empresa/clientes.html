@@ -43,9 +43,6 @@
                     </div>
                 {% endif %}
                 <h6 class="text-lg font-bold text-base-content mb-3">{{ cliente.nombre }}</h6>
-                {% if cliente.descripcion %}
-                    <p class="text-base-content/70 text-sm leading-relaxed">{{ cliente.descripcion|truncatewords:15 }}</p>
-                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -87,6 +84,7 @@
 </section>
 {% endif %}
 
+{% if clientes_destacados %}
 <!-- Clientes Destacados -->
 <section class="py-20 bg-base-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,160 +94,48 @@
                 Algunos de nuestros clientes más importantes a nivel nacional e internacional.
             </p>
         </div>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Phoenix Tower International -->
+            {% for cliente in clientes_destacados %}
             <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
                 <div class="text-center">
-                    <div class="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-broadcast-tower text-primary-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">Phoenix Tower International</h5>
-                    <p class="text-base-content/70 mb-6">Cliente internacional especializado en infraestructura de telecomunicaciones.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>64 Sitios de Telecomunicaciones
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Supervisión de Construcción
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Desarrollo de Software
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Consultoría ESMS
-                        </li>
-                    </ul>
+                    {% if cliente.logo %}
+                        <div class="mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <img src="{{ cliente.logo.url }}" alt="{{ cliente.nombre }}" class="client-logo mx-auto h-16 object-contain">
+                        </div>
+                    {% else %}
+                        <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/20 transition-colors duration-300">
+                            <i class="fas fa-building text-secondary text-2xl"></i>
+                        </div>
+                    {% endif %}
+                    <h5 class="text-xl font-bold text-base-content mb-4">{{ cliente.nombre }}</h5>
+                    {% if cliente.descripcion %}
+                        <p class="text-base-content/70 mb-6">{{ cliente.descripcion }}</p>
+                    {% endif %}
+                    {% if cliente.puntos_importantes_list %}
+                        <ul class="space-y-3 text-left">
+                            {% for punto in cliente.puntos_importantes_list %}
+                                <li class="flex items-center text-base-content/70">
+                                    <i class="fas fa-check text-primary mr-3"></i>{{ punto }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
-            
-            <!-- SpaceX -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-neutral rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-rocket text-neutral-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">SpaceX</h5>
-                    <p class="text-base-content/70 mb-6">Empresa aeroespacial líder en tecnología satelital.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>3 Telepuertos
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Bases Satelitales
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Control de Calidad HSE
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Buenos Aires y Bahía Blanca
-                        </li>
-                    </ul>
+            {% empty %}
+            <div class="col-span-full">
+                <div class="card bg-base-200 border border-base-300 shadow-lg p-10 text-center">
+                    <h3 class="text-2xl font-semibold text-base-content mb-2">Próximamente</h3>
+                    <p class="text-base-content/70">
+                        Estamos actualizando nuestra lista de clientes destacados.
+                    </p>
                 </div>
             </div>
-            
-            <!-- Cambridge College -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-info rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-school text-info-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">Cambridge College</h5>
-                    <p class="text-base-content/70 mb-6">Institución educativa de prestigio internacional.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Teatro Coliseo
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Edificios de Laboratorios
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Estudios de Factibilidad
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Auditorías Técnicas
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- ENDE Corani -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-solar-panel text-accent-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">ENDE Corani</h5>
-                    <p class="text-base-content/70 mb-6">Empresa estatal de energía de Bolivia.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Planta Solar Fotovoltaica
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Ingeniería Básica
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Estudios Topográficos
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Diseño de Accesos
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- ENTEL Chile -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-phone text-secondary-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">ENTEL Chile</h5>
-                    <p class="text-base-content/70 mb-6">Operador de telecomunicaciones líder en Chile.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Carreteras y Rutas
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Infraestructura de Red
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Proyectos de Cobertura
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Desarrollo de Software
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- CITSA -->
-            <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-neutral rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-industry text-neutral-content text-2xl"></i>
-                    </div>
-                    <h5 class="text-xl font-bold text-base-content mb-4">CITSA</h5>
-                    <p class="text-base-content/70 mb-6">Compañía Industrial de Tabacos S.A.</p>
-                    <ul class="space-y-3 text-left">
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Parque Industrial
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Supervisión de Infraestructura
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Edificio 4 Niveles
-                        </li>
-                        <li class="flex items-center text-base-content/70">
-                            <i class="fas fa-check text-primary mr-3"></i>Tinglado 2000 m²
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- Testimonios -->
 <section class="py-20 bg-base-200">

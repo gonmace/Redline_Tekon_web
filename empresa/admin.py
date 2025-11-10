@@ -12,7 +12,6 @@ from .models import (
 @admin.register(Empresa)
 class EmpresaAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'telefono', 'email_principal', 'activo', 'fecha_actualizacion']
-    list_filter = ['activo', 'fecha_creacion']
     search_fields = ['nombre', 'email_principal']
     readonly_fields = ['fecha_creacion', 'fecha_actualizacion']
     
@@ -39,7 +38,6 @@ class EmpresaAdmin(admin.ModelAdmin):
 @admin.register(Servicio)
 class ServicioAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ['nombre', 'orden', 'activo', 'fecha_creacion']
-    list_filter = ['activo', 'fecha_creacion']
     search_fields = ['nombre', 'descripcion']
     list_editable = ['activo']
     ordering = ['orden', 'nombre']
@@ -47,16 +45,15 @@ class ServicioAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(Proyecto)
 class ProyectoAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ['nombre', 'cliente', 'destacado', 'activo', 'orden', 'fecha_creacion']
-    list_filter = ['activo', 'destacado', 'fecha_creacion']
-    search_fields = ['nombre', 'cliente', 'descripcion']
+    list_display = ['nombre', 'cliente_display', 'destacado', 'activo', 'orden', 'fecha_creacion']
+    search_fields = ['nombre', 'cliente', 'descripcion', 'cliente_rel__nombre']
     list_editable = ['destacado', 'activo']
     ordering = ['orden', '-fecha_creacion']
     sortable = 'orden'
     
     fieldsets = (
         ('Información Básica', {
-            'fields': ('nombre', 'descripcion', 'cliente', 'alcance')
+            'fields': ('nombre', 'descripcion', 'cliente_rel', 'cliente', 'alcance')
         }),
         ('Fechas', {
             'fields': ('fecha_inicio', 'fecha_fin')
@@ -84,12 +81,42 @@ class ProyectoAdmin(SortableAdminMixin, admin.ModelAdmin):
         num_updated = self._update_order(updated_items, extra_filters)
         return HttpResponse(f"Updated {num_updated} items")
 
+    def cliente_display(self, obj):
+        return obj.cliente_mostrado
+
+    cliente_display.short_description = 'Cliente'
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'cliente_rel':
+            destacados = Cliente.objects.filter(activo=True, destacado=True).order_by('nombre')
+            if destacados.exists():
+                kwargs['queryset'] = destacados
+            else:
+                kwargs['queryset'] = Cliente.objects.filter(activo=True).order_by('nombre')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 @admin.register(Cliente)
-class ClienteAdmin(admin.ModelAdmin):
-    list_display = ['logo_preview', 'nombre', 'tipo_cliente', 'activo', 'fecha_creacion']
-    list_filter = ['tipo_cliente', 'activo', 'fecha_creacion']
+class ClienteAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ['logo_preview', 'nombre', 'tipo_cliente', 'destacado', 'activo', 'orden', 'fecha_creacion']
     search_fields = ['nombre', 'descripcion']
-    list_editable = ['activo']
+    list_editable = ['destacado', 'activo']
+    ordering = ['orden', 'nombre']
+    sortable = 'orden'
+    fieldsets = (
+        (None, {
+            'fields': ('nombre', 'logo', 'descripcion', 'tipo_cliente', 'destacado', 'activo', 'orden')
+        }),
+        ('Información adicional', {
+            'fields': ('puntos_importantes',),
+            'classes': ('collapse',),
+            'description': 'Opcional: ingresar cada punto en una línea para mostrarlos como bullets en clientes destacados.'
+        }),
+        ('Metadatos', {
+            'fields': ('fecha_creacion',),
+            'classes': ('collapse',),
+        }),
+    )
+    readonly_fields = ['fecha_creacion']
 
     def logo_preview(self, obj):
         if obj.logo:
@@ -107,16 +134,15 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Equipo)
 class EquipoAdmin(admin.ModelAdmin):
-    list_display = ['foto_thumb', 'nombre', 'cargo', 'email', 'activo', 'orden']
-    list_filter = ['activo', 'fecha_creacion']
+    list_display = ['foto_thumb', 'nombre', 'cargo', 'email', 'socio', 'activo', 'orden']
     search_fields = ['nombre', 'cargo', 'email']
-    list_editable = ['orden', 'activo']
+    list_editable = ['orden', 'socio', 'activo']
     ordering = ['orden', 'nombre']
     readonly_fields = ['foto_preview']
 
     fieldsets = (
         ('Información Básica', {
-            'fields': ('nombre', 'cargo', 'descripcion', 'orden', 'activo')
+            'fields': ('nombre', 'cargo', 'descripcion', 'socio', 'orden', 'activo')
         }),
         ('Contacto', {
             'fields': ('email', 'telefono')

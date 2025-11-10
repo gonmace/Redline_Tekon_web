@@ -58,6 +58,14 @@ class Proyecto(models.Model):
     nombre = models.CharField(max_length=300)
     descripcion = models.TextField()
     cliente = models.CharField(max_length=200)
+    cliente_rel = models.ForeignKey(
+        'Cliente',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='proyectos',
+        verbose_name='Cliente (lista)'
+    )
     alcance = models.TextField()
     imagen = models.ImageField(upload_to='proyectos/', blank=True, null=True)
     fecha_inicio = models.DateField(blank=True, null=True)
@@ -75,6 +83,12 @@ class Proyecto(models.Model):
     def __str__(self):
         return self.nombre
 
+    @property
+    def cliente_mostrado(self):
+        if self.cliente_rel:
+            return self.cliente_rel.nombre
+        return self.cliente
+
 class Cliente(models.Model):
     """Modelo para los clientes de la empresa"""
     nombre = models.CharField(max_length=200)
@@ -89,15 +103,30 @@ class Cliente(models.Model):
         default='directo'
     )
     activo = models.BooleanField(default=True)
+    destacado = models.BooleanField(
+        default=False,
+        help_text="Marcar si el cliente debe aparecer en listados destacados o selecciones."
+    )
+    orden = models.PositiveIntegerField(default=0)
+    puntos_importantes = models.TextField(
+        blank=True,
+        help_text="Listado opcional (separado por saltos de línea) de hitos a mostrar en clientes destacados."
+    )
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
-        ordering = ['nombre']
+        ordering = ['orden', 'nombre']
 
     def __str__(self):
         return self.nombre
+
+    @property
+    def puntos_importantes_list(self):
+        if not self.puntos_importantes:
+            return []
+        return [punto.strip() for punto in self.puntos_importantes.splitlines() if punto.strip()]
 
 class Equipo(models.Model):
     """Modelo para el equipo de la empresa"""
@@ -107,6 +136,7 @@ class Equipo(models.Model):
     telefono = models.CharField(max_length=20, blank=True)
     foto = models.ImageField(upload_to='equipo/', blank=True, null=True)
     descripcion = models.TextField(blank=True)
+    socio = models.BooleanField(default=False, verbose_name="Socio")
     activo = models.BooleanField(default=True)
     orden = models.PositiveIntegerField(default=0)
     fecha_creacion = models.DateTimeField(auto_now_add=True)

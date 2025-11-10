@@ -1,5 +1,3 @@
-import random
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -15,10 +13,18 @@ def home(request):
     empresa = Empresa.objects.filter(activo=True).first()
     servicios = Servicio.objects.filter(activo=True).order_by('orden')[:6]
     proyectos_destacados = Proyecto.objects.filter(activo=True, destacado=True).order_by('orden', '-fecha_creacion')[:3]
-    clientes_queryset = Cliente.objects.filter(activo=True).exclude(logo='')
+    clientes_queryset = Cliente.objects.filter(
+        activo=True,
+        destacado=True,
+        logo__isnull=False,
+    ).exclude(logo='').order_by('orden', 'nombre')
+    if not clientes_queryset.exists():
+        clientes_queryset = Cliente.objects.filter(
+            activo=True,
+            logo__isnull=False,
+        ).exclude(logo='').order_by('orden', 'nombre')
     clientes = list(clientes_queryset)
-    random.shuffle(clientes)
-    equipo = Equipo.objects.filter(activo=True).order_by('orden')[:4]
+    equipo = Equipo.objects.filter(activo=True, socio=True).order_by('orden')[:4]
     configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
     
     context = {
@@ -59,14 +65,16 @@ def proyectos(request):
 
 def clientes(request):
     """Vista de la página de clientes"""
-    clientes_directos = Cliente.objects.filter(activo=True, tipo_cliente='directo').order_by('nombre')
-    clientes_finales = Cliente.objects.filter(activo=True, tipo_cliente='final').order_by('nombre')
+    clientes_directos = Cliente.objects.filter(activo=True, tipo_cliente='directo').order_by('orden', 'nombre')
+    clientes_finales = Cliente.objects.filter(activo=True, tipo_cliente='final').order_by('orden', 'nombre')
+    clientes_destacados = Cliente.objects.filter(activo=True, destacado=True).order_by('orden', 'nombre')
     empresa = Empresa.objects.filter(activo=True).first()
     configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
     
     context = {
         'clientes_directos': clientes_directos,
         'clientes_finales': clientes_finales,
+        'clientes_destacados': clientes_destacados,
         'empresa': empresa,
         'configuracion': configuracion,
     }
@@ -132,7 +140,7 @@ def contacto(request):
 def sobre_nosotros(request):
     """Vista de la página sobre nosotros"""
     empresa = Empresa.objects.filter(activo=True).first()
-    equipo = Equipo.objects.filter(activo=True).order_by('orden')
+    equipo = Equipo.objects.filter(activo=True, socio=True).order_by('orden')
     configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
     
     context = {
