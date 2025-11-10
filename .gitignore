@@ -132,7 +132,7 @@ dmypy.json
 # media/*
 # !media/.gitkeep
 staticfiles/
-static/
+# static/
 
 # Node.js (for Tailwind CSS)
 node_modules/
