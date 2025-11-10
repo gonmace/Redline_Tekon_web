@@ -1,0 +1,13 @@
+venv/
+.git/
+.gitignore
+Dockerfile
+*.pyc
+__pycache__/
+*.sqlite3
+staticfiles/
+media/
+.env
+node_modules/
+.idea/
+.vscode/
