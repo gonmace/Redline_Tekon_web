@@ -159,3 +159,4 @@ Thumbs.db
 # Project specific
 *.pdf
 !requirements.txt
+db.sqlite3*
