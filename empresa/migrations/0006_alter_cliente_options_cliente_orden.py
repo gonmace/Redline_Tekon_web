@@ -3,6 +3,13 @@
 from django.db import migrations, models
 
 
+def set_cliente_order(apps, schema_editor):
+    Cliente = apps.get_model('empresa', 'Cliente')
+    for index, cliente in enumerate(Cliente.objects.order_by('nombre'), start=1):
+        cliente.orden = index
+        cliente.save(update_fields=['orden'])
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -19,4 +26,5 @@ class Migration(migrations.Migration):
             name='orden',
             field=models.PositiveIntegerField(default=0),
         ),
+        migrations.RunPython(set_cliente_order, migrations.RunPython.noop),
     ]
