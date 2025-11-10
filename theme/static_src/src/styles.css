@@ -115,8 +115,8 @@
   }
 
   /* Mejoras para imagen de fondo hero en modo oscuro */
-  [data-theme="dark"] .hero-bg-image {
-    opacity: 0.15 !important;
+  .hero-bg-image {
+    opacity: 0.25 !important;
   }
 
   [data-theme="dark"] .hero-bg-overlay {
@@ -146,5 +146,78 @@
 
   [data-theme="dark"] .shadow-lg {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+  }
+  .sombra {
+    -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+  }
+}
+
+@layer components {
+  .logo-slider {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+    border-radius: 1.5rem;
+    box-shadow: 0 35px 60px -45px rgba(15, 23, 42, 0.8);
+  }
+
+  .logo-slider::before,
+  .logo-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .logo-slider::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0) 100%);
+  }
+
+  .logo-slider::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0) 100%);
+  }
+
+  .logo-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 3.5rem;
+    animation: logo-scroll 22s linear infinite;
+  }
+
+  .logo-track img {
+    height: 60px;
+    width: auto;
+    display: inline-block;
+    filter: grayscale(100%);
+    opacity: 0.85;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  .logo-track img:hover {
+    transform: scale(1.2);
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes logo-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }

@@ -25,12 +25,18 @@ SECRET_KEY = 'django-insecure-bke#my1eb20p^7+k6dpw5t*#o+$_23b@y1==krm3=txig^!qnm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'c8d1d11e5fcd.ngrok-free.app',
+    '.ngrok-free.app',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'adminsortable2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

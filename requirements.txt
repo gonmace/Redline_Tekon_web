@@ -9,6 +9,7 @@ click==8.3.0
 cookiecutter==2.6.0
 cryptography==46.0.3
 Django==5.2.7
+django-admin-sortable2==2.2.8
 django-tailwind==4.2.0
 idna==3.11
 Jinja2==3.1.6

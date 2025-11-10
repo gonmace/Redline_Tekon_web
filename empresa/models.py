@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
@@ -14,7 +15,6 @@ class Empresa(models.Model):
     telefono = models.CharField(max_length=20, default="+56 9 3494 9214")
     email_principal = models.EmailField(default="mlujan@tekon-rl.cl")
     email_secundario = models.EmailField(blank=True, null=True)
-    logo = models.ImageField(upload_to='empresa/', blank=True, null=True)
     imagen_principal = models.ImageField(upload_to='empresa/', blank=True, null=True)
     imagen_fondo_hero = models.ImageField(upload_to='empresa/', blank=True, null=True, 
                                         help_text="Imagen de fondo para la sección hero de la página principal")
@@ -33,7 +33,13 @@ class Servicio(models.Model):
     """Modelo para los servicios de la empresa"""
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
-    icono = models.CharField(max_length=100, blank=True, help_text="Clase CSS del icono (ej: fas fa-cogs)")
+    icono = models.FileField(
+        upload_to='servicios/icons/',
+        blank=True,
+        null=True,
+        validators=[FileExtensionValidator(['svg'])],
+        help_text="Archivo SVG del icono del servicio"
+    )
     imagen = models.ImageField(upload_to='servicios/', blank=True, null=True)
     orden = models.PositiveIntegerField(default=0)
     activo = models.BooleanField(default=True)
@@ -59,11 +65,12 @@ class Proyecto(models.Model):
     activo = models.BooleanField(default=True)
     destacado = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+    orden = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"
-        ordering = ['-fecha_creacion']
+        ordering = ['orden', '-fecha_creacion']
 
     def __str__(self):
         return self.nombre
@@ -138,6 +145,7 @@ class ConfiguracionSitio(models.Model):
     descripcion_sitio = models.TextField(blank=True)
     palabras_clave = models.TextField(blank=True, help_text="Palabras clave separadas por comas")
     logo_footer = models.ImageField(upload_to='config/', blank=True, null=True)
+    fondo_global = models.ImageField(upload_to='config/', blank=True, null=True, help_text="Imagen de fondo global del sitio")
     telefono_footer = models.CharField(max_length=20, blank=True)
     email_footer = models.EmailField(blank=True)
     direccion_footer = models.TextField(blank=True)

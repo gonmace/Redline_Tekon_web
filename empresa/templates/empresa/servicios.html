@@ -1,5 +1,6 @@
 {% extends 'empresa/base.html' %}
 {% load static %}
+{% load svg_tags %}
 
 {% block title %}Servicios - {{ empresa.nombre|default:"TK REDLINE SPA" }}{% endblock %}
 
@@ -26,9 +27,9 @@
             {% for servicio in servicios %}
             <div class="card bg-base-100 shadow-lg p-8 group hover:shadow-xl transition-all duration-300">
                 <div class="flex items-start space-x-6">
-                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+                    <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
                         {% if servicio.icono %}
-                            <i class="{{ servicio.icono }} text-primary text-2xl"></i>
+                            {% render_svg servicio.icono "h-12 w-12" %}
                         {% else %}
                             <i class="fas fa-cogs text-primary text-2xl"></i>
                         {% endif %}
