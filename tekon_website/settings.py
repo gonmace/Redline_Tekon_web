@@ -51,6 +51,11 @@ INSTALLED_APPS = [
     'empresa',
 ]
 
+TAILWIND_APP_NAME = 'theme'
+
+TAILWIND_CSS_PATH = 'css/tailwind.css'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -82,6 +87,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tekon_website.wsgi.application'
+
 
 
 # Database
