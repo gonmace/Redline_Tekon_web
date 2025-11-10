@@ -34,6 +34,13 @@ ALLOWED_HOSTS = [
     'redlinegs.com',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://tekon-rl.cl',
+    'https://www.tekon-rl.cl',
+    'https://redlinegs.com',
+    'https://www.redlinegs.com',
+]
+
 
 # Application definition
 
