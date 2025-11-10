@@ -8,16 +8,18 @@ from .models import (
     Empresa, Servicio, Proyecto, Cliente, Equipo, 
     Contacto, ConfiguracionSitio
 )
+from django.contrib.sites.models import Site
 
 @admin.register(Empresa)
 class EmpresaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'telefono', 'email_principal', 'activo', 'fecha_actualizacion']
+    list_display = ['nombre', 'site', 'telefono', 'email_principal', 'activo', 'fecha_actualizacion']
+    list_filter = ['site', 'activo', 'fecha_creacion']
     search_fields = ['nombre', 'email_principal']
     readonly_fields = ['fecha_creacion', 'fecha_actualizacion']
     
     fieldsets = (
         ('Información Básica', {
-            'fields': ('nombre', 'slogan', 'descripcion', 'activo')
+            'fields': ('site', 'nombre', 'slogan', 'descripcion', 'activo')
         }),
         ('Misión, Visión y Valores', {
             'fields': ('mision', 'vision', 'valores')
@@ -34,6 +36,20 @@ class EmpresaAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+    def has_add_permission(self, request):
+        return Site.objects.filter(empresa__isnull=True).exists()
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'site':
+            object_id = request.resolver_match.kwargs.get('object_id') if request.resolver_match else None
+            used_site_ids = list(Site.objects.filter(empresa__isnull=False).values_list('id', flat=True))
+            if object_id:
+                obj = self.get_object(request, object_id)
+                if obj and obj.site_id in used_site_ids:
+                    used_site_ids.remove(obj.site_id)
+            kwargs['queryset'] = Site.objects.exclude(id__in=used_site_ids)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 @admin.register(Servicio)
 class ServicioAdmin(SortableAdminMixin, admin.ModelAdmin):
@@ -98,6 +114,7 @@ class ProyectoAdmin(SortableAdminMixin, admin.ModelAdmin):
 @admin.register(Cliente)
 class ClienteAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ['logo_preview', 'nombre', 'tipo_cliente', 'destacado', 'activo', 'orden', 'fecha_creacion']
+    list_filter = ['tipo_cliente', 'destacado', 'activo', 'fecha_creacion']
     search_fields = ['nombre', 'descripcion']
     list_editable = ['destacado', 'activo']
     ordering = ['orden', 'nombre']
@@ -190,10 +207,11 @@ class ContactoAdmin(admin.ModelAdmin):
 
 @admin.register(ConfiguracionSitio)
 class ConfiguracionSitioAdmin(admin.ModelAdmin):
-    list_display = ['titulo_sitio', 'activo']
+    list_display = ['titulo_sitio', 'site', 'activo']
     fieldsets = (
         ('Información General', {
-            'fields': ('titulo_sitio', 'descripcion_sitio', 'palabras_clave', 'activo')
+            'fields': ('site', 'titulo_sitio', 'descripcion_sitio', 'palabras_clave', 'logo_svg', 'activo'),
+            'description': 'Logo SVG debe ser monocromático y aprovechar currentColor.'
         }),
         ('Apariencia Global', {
             'fields': ('fondo_global',),
@@ -208,5 +226,16 @@ class ConfiguracionSitioAdmin(admin.ModelAdmin):
     )
     
     def has_add_permission(self, request):
-        # Solo permitir una configuración
-        return not ConfiguracionSitio.objects.exists()
+        # Permitir crear configuraciones solo para sitios sin configuración asociada
+        return Site.objects.filter(configuracion_sitio__isnull=True).exists()
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'site':
+            object_id = request.resolver_match.kwargs.get('object_id') if request.resolver_match else None
+            used_site_ids = list(Site.objects.filter(configuracion_sitio__isnull=False).values_list('id', flat=True))
+            if object_id:
+                obj = self.get_object(request, object_id)
+                if obj and obj.site_id in used_site_ids:
+                    used_site_ids.remove(obj.site_id)
+            kwargs['queryset'] = Site.objects.exclude(id__in=used_site_ids)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)

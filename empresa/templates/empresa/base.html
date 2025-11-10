@@ -9,7 +9,7 @@
     <meta name="description" content="{% block description %}{% if configuracion %}{{ configuracion.descripcion_sitio }}{% else %}TK REDLINE SPA - Soluciones Eficientes en Ingeniería, Construcción y Supervisión{% endif %}{% endblock %}">
     <meta name="keywords" content="{% if configuracion %}{{ configuracion.palabras_clave }}{% else %}ingeniería, construcción, supervisión, fiscalización, telecomunicaciones, infraestructura{% endif %}">
     
-    {% load static %}
+    {% load static svg_tags %}
     <!-- Tailwind CSS v4 Compiled -->
     <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -28,7 +28,10 @@
                 <div class="flex-shrink-0">
                     <a href="{% url 'empresa:home' %}" class="flex items-center space-x-3 group">
                         <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 60" preserveAspectRatio="xMidYMid meet" class="h-12 w-auto text-base-content group-hover:scale-105 transition-transform duration-300">
+                            {% if configuracion and configuracion.logo_svg %}
+                                {% render_svg configuracion.logo_svg "h-12 w-auto text-base-content group-hover:scale-105 transition-transform duration-300" %}
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 60" preserveAspectRatio="xMidYMid meet" class="h-12 w-auto text-base-content group-hover:scale-105 transition-transform duration-300">
                                 <defs>
                                     <style>
                                         /* Hereda de text-base-content; si no, usa fallback */
@@ -53,7 +56,8 @@
                                         <tspan style="font-weight:300;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:&quot;Calibri Light&quot;;fill:currentColor;stroke:none">Ingeniería &amp; Supervisión</tspan>
                                     </tspan>
                                 </text>
-                            </svg>
+                                </svg>
+                            {% endif %}
                         </div>
                     </a>
                 </div>
@@ -111,9 +115,15 @@
                          <a href="{% url 'empresa:contacto' %}" class="btn btn-primary ml-4">
                              <i class="fas fa-phone mr-2"></i>Contacto
                          </a>
-                        <a href="https://cloud2.tekon-rl.cl/" target="_blank" rel="noopener" aria-label="Nube Tekon RL" class="ml-2 text-base-content/70 hover:text-primary p-2 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                        {% if site_domain == 'tekon-rl.cl' %}
+                        <a href="https://cloud2.tekon-rl.cl/" target="_blank" rel="noopener" aria-label="Acceso Nube" class="ml-2 text-base-content/70 hover:text-primary p-2 rounded-lg transition-all duration-300 hover:bg-primary/5">
                             <i class="fas fa-cloud text-lg"></i>
                         </a>
+                        {% else %}
+                        <a href="https://cloud.redlinegs.com/" target="_blank" rel="noopener" aria-label="Acceso Nube" class="ml-2 text-base-content/70 hover:text-primary p-2 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                            <i class="fas fa-cloud text-lg"></i>
+                        </a>
+                        {% endif %}
                         <a href="https://premium175.web-hosting.com:2096/" target="_blank" rel="noopener" aria-label="Correo Corporativo" class="ml-1 text-base-content/70 hover:text-primary p-2 rounded-lg transition-all duration-300 hover:bg-primary/5">
                             <i class="fas fa-envelope text-lg"></i>
                         </a>
@@ -154,9 +164,15 @@
                     <i class="fas fa-phone mr-2"></i>Contacto
                 </a>
                 <div class="flex items-center justify-center space-x-4 pt-4">
+                    {% if site_domain == 'tekon-rl.cl' %}
                     <a href="https://cloud2.tekon-rl.cl/" target="_blank" rel="noopener" class="text-base-content/70 hover:text-primary p-3 rounded-full transition-all duration-300 hover:bg-primary/5">
                         <i class="fas fa-cloud"></i>
                     </a>
+                    {% else %}
+                    <a href="https://cloud.redlinegs.com/" target="_blank" rel="noopener" class="text-base-content/70 hover:text-primary p-3 rounded-full transition-all duration-300 hover:bg-primary/5">
+                        <i class="fas fa-cloud"></i>
+                    </a>
+                    {% endif %}
                     <a href="https://premium175.web-hosting.com:2096/" target="_blank" rel="noopener" class="text-base-content/70 hover:text-primary p-3 rounded-full transition-all duration-300 hover:bg-primary/5">
                         <i class="fas fa-envelope"></i>
                     </a>
@@ -197,12 +213,16 @@
                 <!-- Empresa Info -->
                 <div class="md:col-span-2 space-y-6">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-crosshairs text-primary-content text-lg"></i>
+                        <div class="">
+                            {% comment %} {% if configuracion and configuracion.logo_svg %}
+                                {% render_svg configuracion.logo_svg "h-10 w-auto text-primary-content fill-current" %}
+                            {% else %}
+                                <i class="fas fa-crosshairs text-primary-content text-lg"></i>
+                            {% endif %} {% endcomment %}
                         </div>
-                            <div class="text-base-content font-bold text-2xl">
+                            {% comment %} <div class="text-base-content font-bold text-2xl">
                                 <span class="text-primary">TEKON</span> <span class="text-base-content">RedLine</span>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <p class="text-primary font-bold text-xl">
                             {% if empresa %}{{ empresa.slogan }}{% else %}SOLUCIONES EFICIENTES{% endif %}

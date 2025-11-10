@@ -7,10 +7,12 @@ from .models import (
     Empresa, Servicio, Proyecto, Cliente, Equipo, 
     Contacto, ConfiguracionSitio
 )
+from .utils.site_resolver import resolve_site
 
 def home(request):
     """Vista principal de la página de inicio"""
-    empresa = Empresa.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
     servicios = Servicio.objects.filter(activo=True).order_by('orden')[:6]
     proyectos_destacados = Proyecto.objects.filter(activo=True, destacado=True).order_by('orden', '-fecha_creacion')[:3]
     clientes_queryset = Cliente.objects.filter(
@@ -25,7 +27,7 @@ def home(request):
         ).exclude(logo='').order_by('orden', 'nombre')
     clientes = list(clientes_queryset)
     equipo = Equipo.objects.filter(activo=True, socio=True).order_by('orden')[:4]
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'empresa': empresa,
@@ -40,8 +42,9 @@ def home(request):
 def servicios(request):
     """Vista de la página de servicios"""
     servicios = Servicio.objects.filter(activo=True).order_by('orden')
-    empresa = Empresa.objects.filter(activo=True).first()
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'servicios': servicios,
@@ -53,8 +56,9 @@ def servicios(request):
 def proyectos(request):
     """Vista de la página de proyectos"""
     proyectos = Proyecto.objects.filter(activo=True).order_by('orden', '-fecha_creacion')
-    empresa = Empresa.objects.filter(activo=True).first()
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'proyectos': proyectos,
@@ -68,8 +72,9 @@ def clientes(request):
     clientes_directos = Cliente.objects.filter(activo=True, tipo_cliente='directo').order_by('orden', 'nombre')
     clientes_finales = Cliente.objects.filter(activo=True, tipo_cliente='final').order_by('orden', 'nombre')
     clientes_destacados = Cliente.objects.filter(activo=True, destacado=True).order_by('orden', 'nombre')
-    empresa = Empresa.objects.filter(activo=True).first()
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'clientes_directos': clientes_directos,
@@ -83,8 +88,9 @@ def clientes(request):
 def equipo(request):
     """Vista de la página del equipo"""
     equipo = Equipo.objects.filter(activo=True).order_by('orden')
-    empresa = Empresa.objects.filter(activo=True).first()
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'equipo': equipo,
@@ -95,8 +101,9 @@ def equipo(request):
 
 def contacto(request):
     """Vista de la página de contacto"""
-    empresa = Empresa.objects.filter(activo=True).first()
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
@@ -139,9 +146,10 @@ def contacto(request):
 
 def sobre_nosotros(request):
     """Vista de la página sobre nosotros"""
-    empresa = Empresa.objects.filter(activo=True).first()
+    current_site = resolve_site(request)
+    empresa = Empresa.objects.filter(site=current_site, activo=True).first()
     equipo = Equipo.objects.filter(activo=True, socio=True).order_by('orden')
-    configuracion = ConfiguracionSitio.objects.filter(activo=True).first()
+    configuracion = ConfiguracionSitio.objects.filter(site=current_site, activo=True).first()
     
     context = {
         'empresa': empresa,

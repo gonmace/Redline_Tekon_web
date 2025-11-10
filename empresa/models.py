@@ -1,10 +1,17 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.contrib.sites.models import Site
 from django.utils.text import slugify
 from django.urls import reverse
 
 class Empresa(models.Model):
     """Modelo para la información principal de la empresa"""
+    site = models.OneToOneField(
+        Site,
+        on_delete=models.CASCADE,
+        related_name='empresa',
+        help_text="Sitio/dominio al que pertenece esta empresa.",
+    )
     nombre = models.CharField(max_length=200, default="TK REDLINE SPA")
     slogan = models.CharField(max_length=200, default="SOLUCIONES EFICIENTES")
     descripcion = models.TextField(blank=True)
@@ -171,10 +178,23 @@ class Contacto(models.Model):
 
 class ConfiguracionSitio(models.Model):
     """Modelo para configuraciones generales del sitio"""
+    site = models.OneToOneField(
+        Site,
+        on_delete=models.CASCADE,
+        related_name='configuracion_sitio',
+        help_text="Sitio/dominio asociado a esta configuración.",
+    )
     titulo_sitio = models.CharField(max_length=200, default="TK REDLINE SPA")
     descripcion_sitio = models.TextField(blank=True)
     palabras_clave = models.TextField(blank=True, help_text="Palabras clave separadas por comas")
     logo_footer = models.ImageField(upload_to='config/', blank=True, null=True)
+    logo_svg = models.FileField(
+        upload_to='config/',
+        blank=True,
+        null=True,
+        validators=[FileExtensionValidator(['svg'])],
+        help_text="Archivo SVG monocromático que aprovecha currentColor."
+    )
     fondo_global = models.ImageField(upload_to='config/', blank=True, null=True, help_text="Imagen de fondo global del sitio")
     telefono_footer = models.CharField(max_length=20, blank=True)
     email_footer = models.EmailField(blank=True)
@@ -190,7 +210,6 @@ class ConfiguracionSitio(models.Model):
         return "Configuración del Sitio"
 
     def save(self, *args, **kwargs):
-        if not self.pk and ConfiguracionSitio.objects.exists():
-            # Si ya existe una configuración, no crear otra
-            return
+        if not self.pk and ConfiguracionSitio.objects.filter(site=self.site).exists():
+            raise ValueError("Ya existe una configuración para este sitio.")
         super().save(*args, **kwargs)
